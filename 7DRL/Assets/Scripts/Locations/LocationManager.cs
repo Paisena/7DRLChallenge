@@ -18,6 +18,8 @@ public class LocationManager : MonoBehaviour
     public GameObject currentEventIcon;
     public TrainingEventSO currentEvent;
     public Transform CanvasParent;
+    public GameObject[] StatObjects;
+    public GameObject TimeObject;
     public enum LocationIndex
     {
         LocationOne,
@@ -76,7 +78,7 @@ public class LocationManager : MonoBehaviour
 
     private void endTraining()
     {
-        EnableTrainingButtons();
+        EnableTrainingHUD();
         Destroy(currentEventIcon);
         onTrainingEnded?.Invoke();
     }
@@ -139,19 +141,39 @@ public class LocationManager : MonoBehaviour
     public void DisableTrainingHUD()
     {
         DisableTrainingButtons();
+        DisableTrainingStats();
+        DisableTrainingYear();
+    }
+
+    public void DisableTrainingYear()
+    {
+        if (TimeObject != null)
+        {
+            TimeObject.SetActive(false);
+        }
+    }
+
+    public void DisableTrainingStats()
+    {
+        foreach (GameObject statObject in StatObjects)
+        {
+            statObject.SetActive(false);
+        }
     }
 
     public void DisableTrainingButtons()
     {
         foreach (Location location in CurrentLocations)
         {
-            print("Disabling " + location.LocationName + " button");
             location.gameObject.SetActive(false);
         }
     }
+    
     public void EnableTrainingHUD()
     {
         EnableTrainingButtons();
+        EnableTrainingStats();
+        EnableTrainingYear();
     }
 
     public void EnableTrainingButtons()
@@ -160,5 +182,18 @@ public class LocationManager : MonoBehaviour
         {
             location.gameObject.SetActive(true);
         }
+    }
+
+    public void EnableTrainingStats()
+    {
+        foreach (GameObject statObject in StatObjects)
+        {
+            statObject.SetActive(true);
+        }
+    }
+
+    public void EnableTrainingYear()
+    {
+        TimeObject.SetActive(true);
     }
 }
