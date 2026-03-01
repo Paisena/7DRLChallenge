@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using TMPro;
 using UnityEngine;
 
 public class GameTimeManager : MonoBehaviour
@@ -18,6 +19,7 @@ public class GameTimeManager : MonoBehaviour
             Destroy(gameObject);
         }
         gameTime = GetComponent<GameTime>();
+        UpdateTimeText(gameTime.TranslateToTimeUnit());
     }
 
     void OnEnable()
@@ -40,12 +42,22 @@ public class GameTimeManager : MonoBehaviour
     }
     private void ProgressTime()
     {
-        print("Progressing time");
-        gameTime.CurrentTime++; // just update it for now, will probably have to add more stuff later
+        gameTime.CurrentTurn++; // just update it for now, will probably have to add more stuff later
+        string date = gameTime.TranslateToTimeUnit();
+        UpdateTimeText(date);
     }
 
     public void StartTime()
     {
-        gameTime.CurrentTime = 0;
+        gameTime.CurrentTurn = 0;
+    }
+
+    public void UpdateTimeText(string timeText)
+    {
+        GameObject timeTextObject = GameObject.Find("TimeText");
+        if (timeTextObject != null)
+        {
+            timeTextObject.GetComponent<TextMeshProUGUI>().text = timeText;
+        }
     }
 }

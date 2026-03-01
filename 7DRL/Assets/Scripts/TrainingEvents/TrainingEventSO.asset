@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: TrainingEventSO
   m_EditorClassIdentifier: Assembly-CSharp::TrainingEventSO
   EventName: Test 1
-  dialouge: {fileID: 0}
-  statAffected: 0
-  statChangeAmount: 0
+  dialouge: {fileID: 11400000, guid: 235c3b37cf1c39849b41c049b5d30119, type: 2}
+  statAffected: 1
+  statChangeAmount: 100
   eventStage: 0
   targetMoodRequirement: 0
+  locationRequirement: 2

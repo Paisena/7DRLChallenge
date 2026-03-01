@@ -6,11 +6,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEditor.SceneManagement;
+using System;
 
 
 [RequireComponent(typeof(TextMeshProUGUI))]
 public class DialogueTextManager : MonoBehaviour
 {
+    public static DialogueTextManager Instance { get; private set; }
     [SerializeField] private Button optionButtonPrefab;
     [SerializeField] private InputActionAsset actionsAsset; 
     [SerializeField] private string actionMapName = "UI";
@@ -19,7 +21,7 @@ public class DialogueTextManager : MonoBehaviour
     public DialougeSO currentDialouge;
     public TextMeshProUGUI dialogueText;
     [SerializeField] private GameObject nameTextGO;
-    private TextMeshProUGUI nameText;
+    [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] public Vector3 offscreenPosition;
     [SerializeField] public Vector3 onscreenPosition;
     [SerializeField] private float duration = 1f;
@@ -29,6 +31,16 @@ public class DialogueTextManager : MonoBehaviour
     {
         var map = actionsAsset.FindActionMap(actionMapName, true);
         clickAction = map.FindAction("Click", true);
+
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnEnable()
@@ -93,9 +105,12 @@ public class DialogueTextManager : MonoBehaviour
         nameText.text = currentDialouge.CharacterName;
         
         StartCoroutine(moveDialogueBox());
-        
-        
+    }
 
+    public void StartDialouge(Action OnDialougeComplete)
+    {
+        StartDialouge();
+        OnDialougeComplete?.Invoke();
     }
 
     private void NextDialouge()
@@ -119,8 +134,8 @@ public class DialogueTextManager : MonoBehaviour
             {
                 int index = i;
 
-
                 Button optionButton = Instantiate(optionButtonPrefab, new Vector2(0,0), Quaternion.identity, transform.parent);
+                optionButton.transform.SetParent(GameObject.Find("Canvas").transform, false);
                 RectTransform optionButtonRect = optionButtonTransform.GetComponent<RectTransform>();
                 Vector2 buttonPos = new Vector2(optionButtonRect.anchoredPosition.x, optionButtonRect.anchoredPosition.y - (i * optionButtonPrefab.GetComponent<RectTransform>().rect.height)); 
                 
@@ -142,7 +157,10 @@ public class DialogueTextManager : MonoBehaviour
 
     private void EndDialogue()
     {
-        dialogueText.enabled = false;
+        //dialogueText.enabled = false;
+        StartCoroutine(moveDialogueBox());
+
+        LocationManager.Instance.EndTraining();
     }
 
     private void OnChoiceSelected(int choiceIndex)
@@ -165,15 +183,35 @@ public class DialogueTextManager : MonoBehaviour
     private IEnumerator moveDialogueBox()
     {
         float timeElapsed = 0f;
-        while (timeElapsed < duration)
+        if (TextContainer.GetComponent<RectTransform>().position == offscreenPosition)
         {
-            TextContainer.GetComponent<RectTransform>().position = Vector3.Lerp(offscreenPosition, onscreenPosition, timeElapsed / duration);
-            timeElapsed += Time.deltaTime;
-            yield return null; 
+            // move it on screen
+            timeElapsed = 0f;
+            while (timeElapsed < duration)
+            {
+                TextContainer.GetComponent<RectTransform>().position = Vector3.Lerp(offscreenPosition, onscreenPosition, timeElapsed / duration);
+                timeElapsed += Time.deltaTime;
+                yield return null; 
+            }
+
+            TextContainer.GetComponent<RectTransform>().position = onscreenPosition; 
+            EnableTextClick();
+        }
+        else
+        {
+            // move it off screen
+             timeElapsed = 0f;
+            while (timeElapsed < duration)
+            {
+                TextContainer.GetComponent<RectTransform>().position = Vector3.Lerp(onscreenPosition, offscreenPosition, timeElapsed / duration);
+                timeElapsed += Time.deltaTime;
+                yield return null; 
+            }
+
+            TextContainer.GetComponent<RectTransform>().position = offscreenPosition; 
+            DisableTextClick();
         }
 
-        TextContainer.GetComponent<RectTransform>().position = onscreenPosition; 
-        EnableTextClick();
     }
 }
 

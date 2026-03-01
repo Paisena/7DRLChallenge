@@ -39,7 +39,6 @@ public class TrainingEventManager : MonoBehaviour
         Location[] locations = LocationManager.Instance.CurrentLocations;
         foreach (TrainingEventSO trainingEvent in LocationManager.Instance.TrainingEvents)
         {
-                print("Possible event: " + trainingEvent.EventName);
                 if(trainingEvent.eventStage == locations[(int)trainingEvent.locationRequirement].LocationEventIndex && trainingEvent.targetMoodRequirement == TargetManager.Instance.currentTarget.targetMood)
                 {
                     possibleEvents.Add(trainingEvent);

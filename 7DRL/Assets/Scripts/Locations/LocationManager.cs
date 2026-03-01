@@ -16,6 +16,7 @@ public class LocationManager : MonoBehaviour
     private int currentStageIndex =  1;
     public GameObject EventIconPrefab;
     public GameObject currentEventIcon;
+    public TrainingEventSO currentEvent;
     public Transform CanvasParent;
     public enum LocationIndex
     {
@@ -58,21 +59,15 @@ public class LocationManager : MonoBehaviour
         if (location.currentTrainingEvent != null)
         {
             Debug.Log("Current training event: " + location.currentTrainingEvent.EventName);
-            // trigger the event's dialouge
-            //DialougeManager.Instance.StartDialouge(location.currentTrainingEvent.dialouge);
-            // update the player's stats based on the event's stat change amount and stat affected
-            player.stats[location.currentTrainingEvent.statAffected] += location.currentTrainingEvent.statChangeAmount;
-            location.currentTrainingEvent = null;
-            location.LocationEventIndex++; 
-            endTraining();
+            player.Stats[location.currentTrainingEvent.statAffected] += location.currentTrainingEvent.statChangeAmount;
+            // start dialogue 
+            StartTrainingDialogue(location.currentTrainingEvent);
+
             return;
         }
-        else
-        {
-            print("no event");
-        }
         // update stats based on the location's base stat increase and the player's current stats
-        location.baseStatIncrease += player.stats[location.statIndex];
+        player.Stats[location.statIndex] += location.baseStatIncrease;
+        player.UpdateStatText();
         
         // after everything is done end training
         endTraining();
@@ -81,8 +76,16 @@ public class LocationManager : MonoBehaviour
 
     private void endTraining()
     {
+        EnableTrainingButtons();
         Destroy(currentEventIcon);
         onTrainingEnded?.Invoke();
+    }
+    public void EndTraining()
+    {
+        CurrentLocations[(int)currentEvent.locationRequirement].currentTrainingEvent = null;
+        CurrentLocations[(int)currentEvent.locationRequirement].LocationEventIndex++;
+        currentEvent = null;
+        endTraining();
     }
 
     public void UpdateNextStageLocation()
@@ -107,8 +110,6 @@ public class LocationManager : MonoBehaviour
     public void GiveLocationEvent(TrainingEventSO trainingEvent)
     {
         // this function will be called by the TrainingEventManager when a training event is triggered, it will give the player the event for the current location.
-        Debug.Log("Giving player " + trainingEvent.EventName + " event for " + CurrentLocations[(int)trainingEvent.locationRequirement].LocationName);
-
         currentEventIcon = Instantiate(EventIconPrefab);
         currentEventIcon.transform.SetParent(GameObject.Find($"Location{(int)trainingEvent.locationRequirement + 1}").transform, false);
 
@@ -118,6 +119,46 @@ public class LocationManager : MonoBehaviour
         rectTransform.anchoredPosition = CurrentLocations[(int)trainingEvent.locationRequirement].GetComponentInChildren<RectTransform>().anchoredPosition + rectTransform.rect.height * Vector2.up;
         
         CurrentLocations[(int)trainingEvent.locationRequirement].currentTrainingEvent = trainingEvent;
+        currentEvent = trainingEvent;
         return;
+    }
+
+    public void StartTrainingDialogue(TrainingEventSO trainingEvent)
+    {
+        // this function will be called to start the training dialogue for the current event, it will check if there is an event for the current location and if there is it will start the dialogue for that event.
+        if (trainingEvent != null)
+        {
+            DialogueTextManager.Instance.currentDialouge = trainingEvent.dialouge;
+            DialogueTextManager.Instance.StartDialouge();
+        }
+        DisableTrainingHUD();
+
+        return;
+    }
+
+    public void DisableTrainingHUD()
+    {
+        DisableTrainingButtons();
+    }
+
+    public void DisableTrainingButtons()
+    {
+        foreach (Location location in CurrentLocations)
+        {
+            print("Disabling " + location.LocationName + " button");
+            location.gameObject.SetActive(false);
+        }
+    }
+    public void EnableTrainingHUD()
+    {
+        EnableTrainingButtons();
+    }
+
+    public void EnableTrainingButtons()
+    {
+        foreach (Location location in CurrentLocations)
+        {
+            location.gameObject.SetActive(true);
+        }
     }
 }

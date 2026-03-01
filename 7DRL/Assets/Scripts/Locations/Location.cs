@@ -26,9 +26,6 @@ public class Location : MonoBehaviour
 
     public void UpdateLocationInfo(Location location)
     {
-        // this will update the location info based on the current stage, will be called by the LocationManager when the player moves to the next stage.
-        // for example, if the player moves to stage 2, then the location info will be updated to have the info for stage 2.
-        // this is just an example, you can change it to fit your needs.
         LocationName = location.LocationName;
         LocationEvents = location.LocationEvents;
         baseStatIncrease = location.baseStatIncrease;
