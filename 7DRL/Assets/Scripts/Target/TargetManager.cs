@@ -7,6 +7,7 @@ public class TargetManager : MonoBehaviour
     public Target currentTarget;
     public MoodEvent[] moodEvents;
     public int MoodEventChance = 30; 
+    public MoodEventText moodEventText;
     public static event System.Action onMoodEventOver;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -54,6 +55,7 @@ public class TargetManager : MonoBehaviour
 
             // Trigger the dialogue for the mood event
             DialogueTextManager.Instance.StartDialouge(moodEvents[moodEventIndex].dialouge);
+            moodEventText.SetMoodEventText(currentTarget.targetMood.ToString());
             yield return new WaitUntil(() => DialogueTextManager.Instance.isInDialouge == false);
             LocationManager.Instance.EnableTrainingHUD();
         }

@@ -96,7 +96,7 @@ public class DialogueTextManager : MonoBehaviour
     private void OnClick(InputAction.CallbackContext ctx)
     {
         NextDialouge();
-        print($"going to dialouge: {currentDialouge.DialougeName}");
+        //print($"going to dialouge: {currentDialouge.DialougeName}");
     }
 
     public void StartDialouge()

@@ -20,6 +20,7 @@ public class LocationManager : MonoBehaviour
     public Transform CanvasParent;
     public GameObject[] StatObjects;
     public GameObject TimeObject;
+    public GameObject MoodObject;
     public enum LocationIndex
     {
         LocationOne,
@@ -143,8 +144,16 @@ public class LocationManager : MonoBehaviour
         DisableTrainingButtons();
         DisableTrainingStats();
         DisableTrainingYear();
+        DisableTrainingMood();
     }
 
+    public void DisableTrainingMood()
+    {
+        if (MoodObject != null)
+        {
+            MoodObject.SetActive(false);
+        }
+    }
     public void DisableTrainingYear()
     {
         if (TimeObject != null)
@@ -174,6 +183,15 @@ public class LocationManager : MonoBehaviour
         EnableTrainingButtons();
         EnableTrainingStats();
         EnableTrainingYear();
+        EnableTrainingMood();
+    }
+
+    public void EnableTrainingMood()
+    {
+        if (MoodObject != null)
+        {
+            MoodObject.SetActive(true);
+        }
     }
 
     public void EnableTrainingButtons()
