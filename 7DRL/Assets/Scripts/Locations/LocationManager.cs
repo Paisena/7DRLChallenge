@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
@@ -21,6 +22,7 @@ public class LocationManager : MonoBehaviour
     public GameObject[] StatObjects;
     public GameObject TimeObject;
     public GameObject MoodObject;
+    public DialougeSO[] StageOpeningDialogue;
     public enum LocationIndex
     {
         LocationOne,
@@ -43,6 +45,12 @@ public class LocationManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        DisableTrainingHUD();
+        StartCoroutine(StartStageOneDialogue());
+    }
+
     void OnEnable()
     {
         LocationButton.onTrainingSelected += StartTraining;
@@ -51,6 +59,14 @@ public class LocationManager : MonoBehaviour
     void OnDisable()
     {
         LocationButton.onTrainingSelected -= StartTraining;
+    }
+
+    public IEnumerator StartStageOneDialogue()
+    {
+        DialogueTextManager.Instance.currentDialouge = StageOpeningDialogue[0];
+        DialogueTextManager.Instance.StartDialouge();
+        yield return new WaitUntil(() => DialogueTextManager.Instance.isInDialouge == false);
+        EnableTrainingHUD();
     }
     
     private void StartTraining(Location location)
@@ -65,14 +81,13 @@ public class LocationManager : MonoBehaviour
             player.Stats[location.currentTrainingEvent.statAffected] += location.currentTrainingEvent.statChangeAmount;
             // start dialogue 
             StartTrainingDialogue(location.currentTrainingEvent);
-
             return;
         }
         // update stats based on the location's base stat increase and the player's current stats
         player.Stats[location.statIndex] += location.baseStatIncrease;
-        player.UpdateStatText();
         
-        // after everything is done end training
+        player.UpdateStatText();
+
         endTraining();
         return;
     }
@@ -83,6 +98,7 @@ public class LocationManager : MonoBehaviour
         Destroy(currentEventIcon);
         onTrainingEnded?.Invoke();
     }
+
     public void EndTraining()
     {
         CurrentLocations[(int)currentEvent.locationRequirement].currentTrainingEvent = null;
@@ -91,24 +107,19 @@ public class LocationManager : MonoBehaviour
         endTraining();
     }
 
-    public void UpdateNextStageLocation()
+    public void StartTrainingDialogue(TrainingEventSO trainingEvent)
     {
-        currentStageIndex++;
-        // get locations in scene and then update them to have the info for the next stage.
-        Location location = GameObject.Find("Location 1").GetComponent<Location>();
-        location.UpdateLocationInfo(LocationOneInfo[currentStageIndex]);
-
-        location = GameObject.Find("Location 2").GetComponent<Location>();
-        location.UpdateLocationInfo(LocationTwoInfo[currentStageIndex]);
-
-        location = GameObject.Find("Location 3").GetComponent<Location>();
-        location.UpdateLocationInfo(LocationThreeInfo[currentStageIndex]);
-
-        location = GameObject.Find("Location 4").GetComponent<Location>();
-        location.UpdateLocationInfo(LocationFourInfo[currentStageIndex]);
+        // this function will be called to start the training dialogue for the current event, it will check if there is an event for the current location and if there is it will start the dialogue for that event.
+        if (trainingEvent != null)
+        {
+            DialogueTextManager.Instance.currentDialouge = trainingEvent.dialouge;
+            DialogueTextManager.Instance.StartDialouge();
+        }
+        DisableTrainingHUD();
 
         return;
     }
+
 
     public void GiveLocationEvent(TrainingEventSO trainingEvent)
     {
@@ -126,19 +137,7 @@ public class LocationManager : MonoBehaviour
         return;
     }
 
-    public void StartTrainingDialogue(TrainingEventSO trainingEvent)
-    {
-        // this function will be called to start the training dialogue for the current event, it will check if there is an event for the current location and if there is it will start the dialogue for that event.
-        if (trainingEvent != null)
-        {
-            DialogueTextManager.Instance.currentDialouge = trainingEvent.dialouge;
-            DialogueTextManager.Instance.StartDialouge();
-        }
-        DisableTrainingHUD();
-
-        return;
-    }
-
+    #region HUD Management
     public void DisableTrainingHUD()
     {
         DisableTrainingButtons();
@@ -213,5 +212,25 @@ public class LocationManager : MonoBehaviour
     public void EnableTrainingYear()
     {
         TimeObject.SetActive(true);
+    }
+    #endregion
+
+    public void UpdateNextStageLocation()
+    {
+        currentStageIndex++;
+        // get locations in scene and then update them to have the info for the next stage.
+        Location location = GameObject.Find("Location 1").GetComponent<Location>();
+        location.UpdateLocationInfo(LocationOneInfo[currentStageIndex]);
+
+        location = GameObject.Find("Location 2").GetComponent<Location>();
+        location.UpdateLocationInfo(LocationTwoInfo[currentStageIndex]);
+
+        location = GameObject.Find("Location 3").GetComponent<Location>();
+        location.UpdateLocationInfo(LocationThreeInfo[currentStageIndex]);
+
+        location = GameObject.Find("Location 4").GetComponent<Location>();
+        location.UpdateLocationInfo(LocationFourInfo[currentStageIndex]);
+
+        return;
     }
 }

@@ -42,6 +42,7 @@ public class TrainingEventManager : MonoBehaviour
         {
                 if(trainingEvent.eventStage == locations[(int)trainingEvent.locationRequirement].LocationEventIndex && trainingEvent.targetMoodRequirement == TargetManager.Instance.currentTarget.targetMood)
                 {
+                    print("Event " + trainingEvent.EventName + " is possible");
                     possibleEvents.Add(trainingEvent);
                 }
                 else

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0339091ce14bb0640878a4b65c6c98e9, type: 3}
-  m_Name: DialougeFileNameGraphData
+  m_Name: StageOneOpeningDialogueGraphData
   m_EditorClassIdentifier: Assembly-CSharp-Editor::DialougeGraphSavaDataSO
-  <FileName>k__BackingField: DialougeFileName
+  <FileName>k__BackingField: StageOneOpeningDialogue
   <Nodes>k__BackingField:
   - <Name>k__BackingField: D1
     <CharacterName>k__BackingField: 

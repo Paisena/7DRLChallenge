@@ -19,7 +19,7 @@ public class GameTime : MonoBehaviour
             CheckStageEnd();
         }
     } 
-    public int TotalTurnsPerStage = 10;
+    public int TotalTurnsPerStage = 14;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -38,6 +38,9 @@ public class GameTime : MonoBehaviour
         {
             // trigger stage end event
             Debug.Log("Stage ended!");
+            print(CurrentTurn);
+            print(CurrentTurn % TotalTurnsPerStage);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("EndScene");
             // probably just throw player into conffesion scenario
         }
     }

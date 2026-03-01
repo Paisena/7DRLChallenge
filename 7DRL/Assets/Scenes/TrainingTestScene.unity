@@ -1133,6 +1133,10 @@ MonoBehaviour:
   - {fileID: 929336983}
   TimeObject: {fileID: 1891529131}
   MoodObject: {fileID: 1250226566}
+  StageOpeningDialogue:
+  - {fileID: 11400000, guid: d8bde96c0b8d744499f3cc810466aeb7, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &700357378
 Transform:
   m_ObjectHideFlags: 0
@@ -1277,7 +1281,7 @@ MonoBehaviour:
   currentTarget: {fileID: 1440946350}
   moodEvents:
   - {fileID: 11400000, guid: b7e23ab4f66b54043b092d1bf82e4596, type: 2}
-  MoodEventChance: 90
+  MoodEventChance: 10
   moodEventText: {fileID: 1250226568}
 --- !u!4 &783254912
 Transform:
@@ -1853,7 +1857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72c10d20ac316304282f0ac77337318f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameTime
-  TotalTurnsPerStage: 10
+  TotalTurnsPerStage: 12
 --- !u!114 &1007905157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3858,11 +3862,11 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 10343308}
   - {fileID: 1615078651}
   - {fileID: 1408298582}
   - {fileID: 1891529132}
   - {fileID: 1250226567}
+  - {fileID: 10343308}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
