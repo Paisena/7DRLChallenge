@@ -1,0 +1,71 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TrainingEventManager : MonoBehaviour
+{
+    TrainingEventSO[] trainingEventsStageOne;
+    TrainingEventSO[] trainingEventsStageTwo;
+    TrainingEventSO[] trainingEventsStageThree;
+    public int eventChance = 75;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        
+    }
+
+    void OnEnable()
+    {
+        LocationManager.onTrainingEnded += GenerateEventLocation;   
+    }
+
+    void OnDisable()
+    {
+        LocationManager.onTrainingEnded -= GenerateEventLocation;
+    }
+
+    public void GenerateEventLocation()
+    {
+        // roll to see if an event will occur
+        int eventRoll = Random.Range(0, 100);
+        if (eventRoll >= eventChance) 
+        {
+            print("No event occurred");
+            return;
+        }
+        // check what events are possible based on the progression of events given each location and the current target mood
+
+        List<TrainingEventSO> possibleEvents = new List<TrainingEventSO>();
+
+        Location[] locations = LocationManager.Instance.CurrentLocations;
+        foreach (TrainingEventSO trainingEvent in LocationManager.Instance.TrainingEvents)
+        {
+                print("Possible event: " + trainingEvent.EventName);
+                if(trainingEvent.eventStage == locations[(int)trainingEvent.locationRequirement].LocationEventIndex && trainingEvent.targetMoodRequirement == TargetManager.Instance.currentTarget.targetMood)
+                {
+                    possibleEvents.Add(trainingEvent);
+                }
+                else
+                {
+                    print("Event " + trainingEvent.EventName + " is not possible because the event stage is " + trainingEvent.eventStage + " and the location event index is " + locations[(int)trainingEvent.locationRequirement].LocationEventIndex + " or the target mood requirement is " + trainingEvent.targetMoodRequirement + " and the current target mood is " + TargetManager.Instance.currentTarget.targetMood);
+                }
+        }
+
+        // randomly roll for between the possible events.
+        if(possibleEvents.Count == 0)
+        {
+            return;
+        }
+        int whichEvent = Random.Range(0, possibleEvents.Count);
+        TrainingEventSO selectedEvent = possibleEvents[whichEvent];
+
+        LocationManager.Instance.GiveLocationEvent(selectedEvent);
+        return;
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}

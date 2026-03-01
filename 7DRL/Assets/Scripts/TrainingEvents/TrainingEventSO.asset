@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e49f4bdedbc99c4782f52b014231536, type: 3}
+  m_Name: TrainingEventSO
+  m_EditorClassIdentifier: Assembly-CSharp::TrainingEventSO
+  EventName: Test 1
+  dialouge: {fileID: 0}
+  statAffected: 0
+  statChangeAmount: 0
+  eventStage: 0
+  targetMoodRequirement: 0
