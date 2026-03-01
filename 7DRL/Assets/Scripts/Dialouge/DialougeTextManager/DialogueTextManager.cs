@@ -26,6 +26,10 @@ public class DialogueTextManager : MonoBehaviour
     [SerializeField] public Vector3 onscreenPosition;
     [SerializeField] private float duration = 1f;
     public GameObject TextContainer;
+    public bool isInDialouge;
+
+    public static event Action onDialogueStart;
+    public static event Action onDialogueEnd;
 
     private void Awake() 
     {
@@ -104,13 +108,19 @@ public class DialogueTextManager : MonoBehaviour
         nameText.enabled = true;
         nameText.text = currentDialouge.CharacterName;
         
+        LocationManager.Instance.DisableTrainingHUD();
+
+        isInDialouge = true;
+        
+        onDialogueStart?.Invoke();
         StartCoroutine(moveDialogueBox());
+
     }
 
-    public void StartDialouge(Action OnDialougeComplete)
+    public void StartDialouge(DialougeSO dialouge)
     {
+        currentDialouge = dialouge;
         StartDialouge();
-        OnDialougeComplete?.Invoke();
     }
 
     private void NextDialouge()
@@ -157,9 +167,10 @@ public class DialogueTextManager : MonoBehaviour
 
     private void EndDialogue()
     {
-        //dialogueText.enabled = false;
+        isInDialouge = false;
         StartCoroutine(moveDialogueBox());
-
+        onDialogueEnd?.Invoke();
+        if (LocationManager.Instance.currentEvent != null)
         LocationManager.Instance.EndTraining();
     }
 

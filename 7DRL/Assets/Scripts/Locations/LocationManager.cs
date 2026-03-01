@@ -44,15 +44,15 @@ public class LocationManager : MonoBehaviour
 
     void OnEnable()
     {
-        LocationButton.onTrainingSelected += startTraining;
+        LocationButton.onTrainingSelected += StartTraining;
     }
 
     void OnDisable()
     {
-        LocationButton.onTrainingSelected -= startTraining;
+        LocationButton.onTrainingSelected -= StartTraining;
     }
     
-    private void startTraining(Location location)
+    private void StartTraining(Location location)
     {
         // This function will be called when the player clicks on a location button, it will start the training for that location.
         // You can add any additional functionality you want here, such as loading a new scene or displaying a new UI panel.

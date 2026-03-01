@@ -15,16 +15,17 @@ public class TrainingEventManager : MonoBehaviour
 
     void OnEnable()
     {
-        LocationManager.onTrainingEnded += GenerateEventLocation;   
+        TargetManager.onMoodEventOver += GenerateEventLocation;   
     }
 
     void OnDisable()
     {
-        LocationManager.onTrainingEnded -= GenerateEventLocation;
+        TargetManager.onMoodEventOver -= GenerateEventLocation;
     }
 
     public void GenerateEventLocation()
     {
+        print("Generating event location");
         // roll to see if an event will occur
         int eventRoll = Random.Range(0, 100);
         if (eventRoll >= eventChance) 

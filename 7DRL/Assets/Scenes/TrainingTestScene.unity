@@ -871,6 +871,7 @@ MonoBehaviour:
   onscreenPosition: {x: 293.3333, y: 254.83334, z: 0}
   duration: 0.5
   TextContainer: {fileID: 10343307}
+  isInDialouge: 0
 --- !u!114 &591728889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1273,6 +1274,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TargetManager
   currentTarget: {fileID: 1440946350}
+  moodEvents:
+  - {fileID: 11400000, guid: b7e23ab4f66b54043b092d1bf82e4596, type: 2}
+  MoodEventChance: 90
 --- !u!4 &783254912
 Transform:
   m_ObjectHideFlags: 0
@@ -1645,7 +1649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d581f03fe809cd048bbe3913c96da999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrainingEventManager
-  eventChance: 10
+  eventChance: 90
 --- !u!4 &964774232
 Transform:
   m_ObjectHideFlags: 0
