@@ -168,10 +168,11 @@ public class DialogueTextManager : MonoBehaviour
     private void EndDialogue()
     {
         isInDialouge = false;
+        print("Dialogue ended" + isInDialouge);
         StartCoroutine(moveDialogueBox());
         onDialogueEnd?.Invoke();
         if (LocationManager.Instance.currentEvent != null)
-        LocationManager.Instance.EndTraining();
+            LocationManager.Instance.EndTraining();
     }
 
     private void OnChoiceSelected(int choiceIndex)

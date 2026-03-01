@@ -14,14 +14,17 @@ public class LocationManager : MonoBehaviour
     public Location[] CurrentLocations;
     public TrainingEventSO[] TrainingEvents;
     public Player player;
-    private int currentStageIndex =  1;
+    private int currentStageIndex = 1;
     public GameObject EventIconPrefab;
     public GameObject currentEventIcon;
     public TrainingEventSO currentEvent;
     public Transform CanvasParent;
+    // Gameobjects for the HUD elements so they can be turned on and off when needed.
     public GameObject[] StatObjects;
     public GameObject TimeObject;
     public GameObject MoodObject;
+    public GameObject MoodChangeObject;
+
     public DialougeSO[] StageOpeningDialogue;
     public enum LocationIndex
     {
@@ -144,6 +147,16 @@ public class LocationManager : MonoBehaviour
         DisableTrainingStats();
         DisableTrainingYear();
         DisableTrainingMood();
+        DisableMoodChange();
+    }
+
+    public void DisableMoodChange()
+    {
+        // needs to be enabled for it to function so i will jsut throw it off the map
+        if (MoodChangeObject != null)
+        {
+            MoodChangeObject.transform.position = new Vector2(MoodChangeObject.transform.position.x - 1000, MoodChangeObject.transform.position.y - 1000);
+        }
     }
 
     public void DisableTrainingMood()
@@ -153,6 +166,7 @@ public class LocationManager : MonoBehaviour
             MoodObject.SetActive(false);
         }
     }
+
     public void DisableTrainingYear()
     {
         if (TimeObject != null)
@@ -183,6 +197,16 @@ public class LocationManager : MonoBehaviour
         EnableTrainingStats();
         EnableTrainingYear();
         EnableTrainingMood();
+        EnableMoodChange();
+        print("Training HUD enabled");
+    }
+    
+    public void EnableMoodChange()
+    {
+        if (MoodChangeObject != null)
+        {
+            MoodChangeObject.transform.position = MoodChangeObject.GetComponent<MoodChangeButton>().OriginalPosition;
+        }
     }
 
     public void EnableTrainingMood()
