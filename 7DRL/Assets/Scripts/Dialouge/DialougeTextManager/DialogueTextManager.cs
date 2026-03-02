@@ -7,6 +7,9 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEditor.SceneManagement;
 using System;
+using System.Collections.Generic;
+using NUnit.Framework;
+using System.Linq;
 
 
 [RequireComponent(typeof(TextMeshProUGUI))]
@@ -27,9 +30,18 @@ public class DialogueTextManager : MonoBehaviour
     [SerializeField] private float duration = 1f;
     public GameObject TextContainer;
     public bool isInDialouge;
-
+    public enum ChoiceReuirementTypes
+    {
+        statOne,
+        statTwo,
+        statThree,
+        statFour,
+        item,
+        progress
+    }
     public static event Action onDialogueStart;
     public static event Action onDialogueEnd;
+    public Player player;
 
     private void Awake() 
     {
@@ -114,7 +126,6 @@ public class DialogueTextManager : MonoBehaviour
         
         onDialogueStart?.Invoke();
         StartCoroutine(moveDialogueBox());
-
     }
 
     public void StartDialouge(DialougeSO dialouge)
@@ -139,6 +150,7 @@ public class DialogueTextManager : MonoBehaviour
         {
             //disable input outside of the button.
             OnDisable(); // proably change this later
+
             GameObject optionButtonTransform = GameObject.Find("ChoiceTransform");
             for (int i = 0; i < currentDialouge.Choices.Count; i++)
             {
@@ -151,6 +163,23 @@ public class DialogueTextManager : MonoBehaviour
                 
                 optionButton.GetComponent<RectTransform>().anchoredPosition = buttonPos;
                 optionButton.GetComponentInChildren<TextMeshProUGUI>().text = currentDialouge.Choices[i].Text + " Button";
+
+                // Check if player has stats for option 
+                if (!string.IsNullOrEmpty(currentDialouge.Choices[i].Requirements))
+                {
+                    if(DoesPlayerMeetRequirements(currentDialouge.Choices[i].Requirements))
+                    {
+                        optionButton.interactable = true;
+                    }
+                    else
+                    {
+                        optionButton.interactable = false;
+                    }
+                }
+                else
+                {
+                    print("No requirements for this choice");
+                }
                 
                 AddChoiceListener(optionButton, index);
                 optionButton.tag = "OptionButton";
@@ -178,6 +207,17 @@ public class DialogueTextManager : MonoBehaviour
     private void OnChoiceSelected(int choiceIndex)
     {
         print("Choice " + choiceIndex + " selected");
+        int progressValue = ChoiceDataParser.GetProgressValue(currentDialouge.Choices[choiceIndex].Requirements);
+        if (progressValue != 0)
+        {
+            // if this choice has a progress requirement, increase the progress meter by that amount
+            TargetManager.Instance.ChangeProgressMeter(progressValue);
+            print("Progress Meter Increased by: " + progressValue);
+            // play animation
+
+            // check if progress meter is full, if so trigger mood event
+
+        }
         currentDialouge = GetNextDialogue(currentDialouge, choiceIndex);
         UpdateText();
         foreach (GameObject child in GameObject.FindGameObjectsWithTag("OptionButton"))
@@ -223,7 +263,55 @@ public class DialogueTextManager : MonoBehaviour
             TextContainer.GetComponent<RectTransform>().position = offscreenPosition; 
             DisableTextClick();
         }
+    }
 
+    public bool DoesPlayerMeetRequirements(string requirements)
+    {
+        // parse the requirements string and check if the player meets them
+        // this is just a placeholder implementation, you would need to replace this with your actual requirement checking logic
+        Dictionary<ChoiceReuirementTypes, string> parsedRequirements = ChoiceDataParser.ParseChoiceData(requirements);
+        foreach (var requirement in parsedRequirements)
+        {
+            print($"Checking Requirement Type: {requirement.Key}, Value: {requirement.Value}");
+            // check if the player meets this requirement
+            // if not, return false
+            if (requirement.Key == ChoiceReuirementTypes.statOne)
+            {
+                if (player.Stats[0] < float.Parse(requirement.Value))
+                {
+                    return false;
+                }
+            }
+            else if (requirement.Key == ChoiceReuirementTypes.statTwo)
+            {
+                if (player.Stats[1] < float.Parse(requirement.Value))
+                {
+                    return false;
+                }
+            }
+            else if (requirement.Key == ChoiceReuirementTypes.statThree)
+            {
+                if (player.Stats[2] < float.Parse(requirement.Value))
+                {
+                    return false;
+                }
+            }
+            else if (requirement.Key == ChoiceReuirementTypes.statFour)
+            {
+                if (player.Stats[3] < float.Parse(requirement.Value))
+                {
+                    return false;
+                }
+            }
+            else if (requirement.Key == ChoiceReuirementTypes.item)
+            {
+                if(!player.items.Any(item => item == requirement.Value))
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
 

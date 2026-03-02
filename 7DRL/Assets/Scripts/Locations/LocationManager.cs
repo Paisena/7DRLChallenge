@@ -7,14 +7,14 @@ public class LocationManager : MonoBehaviour
 {
     public static LocationManager Instance;
     // These are arrays with each index being for the stage
-    public Location[] LocationOneInfo;
-    public Location[] LocationTwoInfo;
-    public Location[] LocationThreeInfo;
-    public Location[] LocationFourInfo;
+    public LocationSO[] LocationOneInfo;
+    public LocationSO[] LocationTwoInfo;
+    public LocationSO[] LocationThreeInfo;
+    public LocationSO[] LocationFourInfo;
     public Location[] CurrentLocations;
     public TrainingEventSO[] TrainingEvents;
     public Player player;
-    private int currentStageIndex = 1;
+    public int currentStageIndex = 1;
     public GameObject EventIconPrefab;
     public GameObject currentEventIcon;
     public TrainingEventSO currentEvent;
@@ -26,6 +26,7 @@ public class LocationManager : MonoBehaviour
     public GameObject MoodChangeObject;
 
     public DialougeSO[] StageOpeningDialogue;
+    public DialougeSO[] ConfessionDialogue;
     public enum LocationIndex
     {
         LocationOne,
@@ -57,11 +58,13 @@ public class LocationManager : MonoBehaviour
     void OnEnable()
     {
         LocationButton.onTrainingSelected += StartTraining;
+        GameTime.onStageEnd += StartConfessionScenario;
     }
 
     void OnDisable()
     {
         LocationButton.onTrainingSelected -= StartTraining;
+        GameTime.onStageEnd -= StartConfessionScenario;
     }
 
     public IEnumerator StartStageOneDialogue()
@@ -70,6 +73,30 @@ public class LocationManager : MonoBehaviour
         DialogueTextManager.Instance.StartDialouge();
         yield return new WaitUntil(() => DialogueTextManager.Instance.isInDialouge == false);
         EnableTrainingHUD();
+    }
+
+    public void StartConfessionScenario()
+    {
+        StartCoroutine(ConfessionScenario());
+    }
+
+    public IEnumerator ConfessionScenario()
+    {
+        DisableTrainingHUD();
+        DialogueTextManager.Instance.currentDialouge = ConfessionDialogue[currentStageIndex - 1];
+        DialogueTextManager.Instance.StartDialouge();
+        yield return new WaitUntil(() => DialogueTextManager.Instance.isInDialouge == false);
+        
+        if (!TargetManager.Instance.currentTarget.gameOver)
+        {
+            UpdateNextStageLocation();
+            EnableTrainingHUD();
+        }
+        else
+        {
+            // probably just throw player into conffesion scenario
+            UnityEngine.SceneManagement.SceneManager.LoadScene("EndScene");
+        }
     }
     
     private void StartTraining(Location location)
@@ -243,16 +270,16 @@ public class LocationManager : MonoBehaviour
     {
         currentStageIndex++;
         // get locations in scene and then update them to have the info for the next stage.
-        Location location = GameObject.Find("Location 1").GetComponent<Location>();
+        Location location = GameObject.Find("Location1").GetComponent<Location>();
         location.UpdateLocationInfo(LocationOneInfo[currentStageIndex]);
 
-        location = GameObject.Find("Location 2").GetComponent<Location>();
+        location = GameObject.Find("Location2").GetComponent<Location>();
         location.UpdateLocationInfo(LocationTwoInfo[currentStageIndex]);
 
-        location = GameObject.Find("Location 3").GetComponent<Location>();
+        location = GameObject.Find("Location3").GetComponent<Location>();
         location.UpdateLocationInfo(LocationThreeInfo[currentStageIndex]);
 
-        location = GameObject.Find("Location 4").GetComponent<Location>();
+        location = GameObject.Find("Location4").GetComponent<Location>();
         location.UpdateLocationInfo(LocationFourInfo[currentStageIndex]);
 
         return;

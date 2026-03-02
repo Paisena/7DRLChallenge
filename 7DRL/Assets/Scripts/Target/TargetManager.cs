@@ -61,4 +61,9 @@ public class TargetManager : MonoBehaviour
         }
         onMoodEventOver?.Invoke();
     }
+
+    public void ChangeProgressMeter(int amount)
+    {
+        currentTarget.progressValue += amount;
+    }
 }

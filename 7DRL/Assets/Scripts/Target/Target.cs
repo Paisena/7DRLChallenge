@@ -12,6 +12,8 @@ public class Target : MonoBehaviour
         
     }    
     public Mood targetMood;
+    public int progressValue = 0;
+    public bool gameOver = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

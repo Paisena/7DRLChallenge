@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     public float[] Stats;
     // not one hundred percent sure the names of the stats so probably change later
     public string[] statNames;
+    public string[] items;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

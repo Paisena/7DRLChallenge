@@ -33,6 +33,15 @@ public class Location : MonoBehaviour
         UpdateLocationButtonName();
     }
 
+    public void UpdateLocationInfo(LocationSO locationSO)
+    {
+        LocationName = locationSO.LocationName;
+        LocationEvents = locationSO.LocationEvents;
+        baseStatIncrease = locationSO.baseStatIncrease;
+        statIndex = locationSO.statIndex;
+        UpdateLocationButtonName();
+    }
+
     public void UpdateLocationButtonName()
     {
         TextMeshProUGUI buttonText = GetComponentInChildren<TextMeshProUGUI>();

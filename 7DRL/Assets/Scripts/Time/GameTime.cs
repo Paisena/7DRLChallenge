@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 // This scripts holds the information and functions for time and it's progress duringthe training stage
 public class GameTime : MonoBehaviour
 {
+    public static event Action onStageEnd;
     public enum StageOneTimeUnits
     {
         Semester,
@@ -38,10 +40,9 @@ public class GameTime : MonoBehaviour
         {
             // trigger stage end event
             Debug.Log("Stage ended!");
-            print(CurrentTurn);
-            print(CurrentTurn % TotalTurnsPerStage);
-            UnityEngine.SceneManagement.SceneManager.LoadScene("EndScene");
-            // probably just throw player into conffesion scenario
+            // add trainsition to confession scenario here
+
+            onStageEnd?.Invoke();
         }
     }
 
