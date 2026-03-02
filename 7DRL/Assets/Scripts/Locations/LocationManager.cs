@@ -53,6 +53,10 @@ public class LocationManager : MonoBehaviour
     {
         DisableTrainingHUD();
         StartCoroutine(StartStageOneDialogue());
+        CurrentLocations[0].UpdateLocationInfo(LocationOneInfo[currentStageIndex]);
+        CurrentLocations[1].UpdateLocationInfo(LocationTwoInfo[currentStageIndex]);
+        CurrentLocations[2].UpdateLocationInfo(LocationThreeInfo[currentStageIndex]);
+        CurrentLocations[3].UpdateLocationInfo(LocationFourInfo[currentStageIndex]); // :)
     }
 
     void OnEnable()
@@ -83,7 +87,7 @@ public class LocationManager : MonoBehaviour
     public IEnumerator ConfessionScenario()
     {
         DisableTrainingHUD();
-        DialogueTextManager.Instance.currentDialouge = ConfessionDialogue[currentStageIndex - 1];
+        DialogueTextManager.Instance.currentDialouge = ConfessionDialogue[currentStageIndex];
         DialogueTextManager.Instance.StartDialouge();
         yield return new WaitUntil(() => DialogueTextManager.Instance.isInDialouge == false);
         

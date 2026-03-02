@@ -88,7 +88,8 @@ public class DialogueTextManager : MonoBehaviour
         TextContainer.GetComponent<RectTransform>().position = offscreenPosition;
         dialogueText.enabled = false;
 
-        nameText = nameTextGO.GetComponentInChildren<TextMeshProUGUI>();
+        //nameText = nameTextGO.GetComponent<TextMeshProUGUI>();
+        nameTextGO.SetActive(true);
         nameText.enabled = false;
         
         DisableTextClick();

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6e779b281d927f4b81e5a00d024a3e7, type: 3}
   m_Name: L2S3
   m_EditorClassIdentifier: Assembly-CSharp::LocationSO
-  LocationName: 
+  LocationName: Location Two
   LocationEvents: []
   LocationEventIndex: 0
   baseStatIncrease: 30
