@@ -269,18 +269,14 @@ public class LocationManager : MonoBehaviour
     public void UpdateNextStageLocation()
     {
         currentStageIndex++;
+
+        
         // get locations in scene and then update them to have the info for the next stage.
-        Location location = GameObject.Find("Location1").GetComponent<Location>();
-        location.UpdateLocationInfo(LocationOneInfo[currentStageIndex]);
-
-        location = GameObject.Find("Location2").GetComponent<Location>();
-        location.UpdateLocationInfo(LocationTwoInfo[currentStageIndex]);
-
-        location = GameObject.Find("Location3").GetComponent<Location>();
-        location.UpdateLocationInfo(LocationThreeInfo[currentStageIndex]);
-
-        location = GameObject.Find("Location4").GetComponent<Location>();
-        location.UpdateLocationInfo(LocationFourInfo[currentStageIndex]);
+        // can jsut make this location info a 2D array but im lazy so we wil do it later if needed
+        CurrentLocations[0].UpdateLocationInfo(LocationOneInfo[currentStageIndex]);
+        CurrentLocations[1].UpdateLocationInfo(LocationTwoInfo[currentStageIndex]);
+        CurrentLocations[2].UpdateLocationInfo(LocationThreeInfo[currentStageIndex]);
+        CurrentLocations[3].UpdateLocationInfo(LocationFourInfo[currentStageIndex]);
 
         return;
     }

@@ -15,6 +15,6 @@ MonoBehaviour:
   LocationName: 
   LocationEvents: []
   LocationEventIndex: 0
-  baseStatIncrease: 0
-  statIndex: 0
-  locationIndex: 0
+  baseStatIncrease: 20
+  statIndex: 3
+  locationIndex: 3

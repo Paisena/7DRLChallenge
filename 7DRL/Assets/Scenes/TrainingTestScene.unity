@@ -984,6 +984,7 @@ MonoBehaviour:
   duration: 0.5
   TextContainer: {fileID: 10343307}
   isInDialouge: 0
+  player: {fileID: 1793379098}
 --- !u!114 &591728889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1222,10 +1223,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fb45d0a009e80f4db62fbaa3ee0d2f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocationManager
-  LocationOneInfo: []
-  LocationTwoInfo: []
-  LocationThreeInfo: []
-  LocationFourInfo: []
+  LocationOneInfo:
+  - {fileID: 11400000, guid: 897690cbcbce2c24a923a8dc3a86fbd2, type: 2}
+  - {fileID: 11400000, guid: 0a773983a6935434b9a73b593d504aa0, type: 2}
+  - {fileID: 11400000, guid: 60957b5d31a5f2246b8b589f0ddb91a9, type: 2}
+  LocationTwoInfo:
+  - {fileID: 11400000, guid: 0e4bd8239b9626340a94250ed7d3dcc4, type: 2}
+  - {fileID: 11400000, guid: 8b381f5b86085c4438aaceaf7ac36561, type: 2}
+  - {fileID: 11400000, guid: f5c280780e534d641a4787f6d145981a, type: 2}
+  LocationThreeInfo:
+  - {fileID: 11400000, guid: a2cfe945fa355c14b9bbee743fd7f93b, type: 2}
+  - {fileID: 11400000, guid: 690a44f86a86ee34b877d59a3798d22f, type: 2}
+  - {fileID: 11400000, guid: a47c9d88c7ec840448f00f51a1c8eef2, type: 2}
+  LocationFourInfo:
+  - {fileID: 11400000, guid: d501a1ea2ca9e7e4692be054d0fb54b9, type: 2}
+  - {fileID: 11400000, guid: 316566bbea15ee94297c840e05d56b23, type: 2}
+  - {fileID: 11400000, guid: e88ddc11513c636499880f2e2f1d73a1, type: 2}
   CurrentLocations:
   - {fileID: 1161031689}
   - {fileID: 14988999}
@@ -1234,6 +1247,7 @@ MonoBehaviour:
   TrainingEvents:
   - {fileID: 11400000, guid: 9f91762e807af3a49aa75a1ca1048f03, type: 2}
   player: {fileID: 1793379098}
+  currentStageIndex: 1
   EventIconPrefab: {fileID: 1459118432758001730, guid: 623c9c229c47c4141b5d3c5cbc2f6afc, type: 3}
   currentEventIcon: {fileID: 0}
   currentEvent: {fileID: 0}
@@ -1248,6 +1262,10 @@ MonoBehaviour:
   MoodChangeObject: {fileID: 1571695011}
   StageOpeningDialogue:
   - {fileID: 11400000, guid: 80d98df7623eeab448bfa20844acb9e9, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  ConfessionDialogue:
+  - {fileID: 11400000, guid: d8bde96c0b8d744499f3cc810466aeb7, type: 2}
   - {fileID: 0}
   - {fileID: 0}
 --- !u!4 &700357378
@@ -2920,6 +2938,8 @@ MonoBehaviour:
   TargetName: Bobette
   TargetDescription: asds
   targetMood: 0
+  progressValue: 0
+  gameOver: 0
 --- !u!4 &1440946351
 Transform:
   m_ObjectHideFlags: 0
@@ -4494,6 +4514,7 @@ MonoBehaviour:
   - SADKJl
   - askldjasl
   - ASLKDj
+  items: []
 --- !u!4 &1793379099
 Transform:
   m_ObjectHideFlags: 0
