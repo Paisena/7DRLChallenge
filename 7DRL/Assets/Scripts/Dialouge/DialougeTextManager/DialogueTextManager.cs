@@ -25,6 +25,7 @@ public class DialogueTextManager : MonoBehaviour
     public TextMeshProUGUI dialogueText;
     [SerializeField] private GameObject nameTextGO;
     [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private Image characterIconRenderer;
     [SerializeField] public Vector3 offscreenPosition;
     [SerializeField] public Vector3 onscreenPosition;
     [SerializeField] private float duration = 1f;
@@ -105,6 +106,7 @@ public class DialogueTextManager : MonoBehaviour
         dialogueText.text = currentDialouge.Text;
         DialogueLog.Instance.AddToLog(currentDialouge.Text);
         nameText.text = currentDialouge.CharacterName;
+        characterIconRenderer.sprite = currentDialouge.CharacterIcon;
     }
 
     private void OnClick(InputAction.CallbackContext ctx)
@@ -122,7 +124,7 @@ public class DialogueTextManager : MonoBehaviour
         
         nameText.enabled = true;
         nameText.text = currentDialouge.CharacterName;
-        
+        characterIconRenderer.sprite = currentDialouge.CharacterIcon;
         LocationManager.Instance.DisableTrainingHUD();
 
         isInDialouge = true;

@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialougeSO
   <DialougeName>k__BackingField: D1
   <CharacterName>k__BackingField: 
-  <CharacterIcon>k__BackingField: insert file path here
+  <CharacterIcon>k__BackingField: {fileID: 21300000, guid: f0ac408f34ad0c0419aca771715a18a7, type: 3}
   <Text>k__BackingField: This is the first thing that should appear when the game
     starts
   <Choices>k__BackingField:
   - <Name>k__BackingField: 
     <Text>k__BackingField: Next Dialouge
+    <Requirements>k__BackingField: 
     <NextDialouge>k__BackingField: {fileID: 11400000, guid: e7b5739cd063a8249904d05681f36f48, type: 2}
   <DialougeTypes>k__BackingField: 0
   <IsStartingDialouge>k__BackingField: 1
