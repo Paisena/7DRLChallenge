@@ -30,7 +30,7 @@ public class TrainingEventManager : MonoBehaviour
         int eventRoll = Random.Range(0, 100);
         if (eventRoll >= eventChance) 
         {
-            print("No event occurred");
+            print($"event roll is {eventRoll} and event chance is {eventChance} so no event will occur");
             return;
         }
         // check what events are possible based on the progression of events given each location and the current target mood

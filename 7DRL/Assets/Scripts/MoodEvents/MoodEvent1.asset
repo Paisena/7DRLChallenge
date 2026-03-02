@@ -15,4 +15,4 @@ MonoBehaviour:
   EventName: THing
   dialouge: {fileID: 11400000, guid: eaca3a9fa90d81d46839afe9049861d2, type: 2}
   WhatStage: 0
-  MoodChangeTo: 1
+  MoodChangeTo: 0

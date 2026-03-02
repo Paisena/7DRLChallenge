@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 // This scripts holds the information and functions for time and it's progress duringthe training stage
 public class GameTime : MonoBehaviour
@@ -18,7 +19,7 @@ public class GameTime : MonoBehaviour
         set
         {
             currentTurn = value;
-            CheckStageEnd();
+            StartCoroutine(CheckStageEnd());
         }
     } 
     public int TotalTurnsPerStage = 14;
@@ -34,8 +35,9 @@ public class GameTime : MonoBehaviour
         
     }
 
-    public void CheckStageEnd()
+    public IEnumerator CheckStageEnd()
     {
+        yield return new WaitUntil(() => DialogueTextManager.Instance.isInDialouge == false);
         if (CurrentTurn > 0 && CurrentTurn % TotalTurnsPerStage == 0)
         {
             // trigger stage end event

@@ -27,6 +27,7 @@ public class LocationManager : MonoBehaviour
 
     public DialougeSO[] StageOpeningDialogue;
     public DialougeSO[] ConfessionDialogue;
+    public bool isTraining = false;
     public enum LocationIndex
     {
         LocationOne,
@@ -86,6 +87,7 @@ public class LocationManager : MonoBehaviour
 
     public IEnumerator ConfessionScenario()
     {
+        yield return new WaitUntil(() => DialogueTextManager.Instance.isInDialouge == false);
         DisableTrainingHUD();
         DialogueTextManager.Instance.currentDialouge = ConfessionDialogue[currentStageIndex];
         DialogueTextManager.Instance.StartDialouge();
@@ -113,6 +115,7 @@ public class LocationManager : MonoBehaviour
         {
             Debug.Log("Current training event: " + location.currentTrainingEvent.EventName);
             player.Stats[location.currentTrainingEvent.statAffected] += location.currentTrainingEvent.statChangeAmount;
+            isTraining = true;
             // start dialogue 
             StartTrainingDialogue(location.currentTrainingEvent);
             return;

@@ -103,6 +103,7 @@ public class DialogueTextManager : MonoBehaviour
     private void UpdateText()
     {
         dialogueText.text = currentDialouge.Text;
+        DialogueLog.Instance.AddToLog(currentDialouge.Text);
         nameText.text = currentDialouge.CharacterName;
     }
 
@@ -117,6 +118,7 @@ public class DialogueTextManager : MonoBehaviour
         // display anything related to dialouge here
         dialogueText.enabled = true;
         dialogueText.text = currentDialouge.Text;
+        DialogueLog.Instance.AddToLog(currentDialouge.Text);
         
         nameText.enabled = true;
         nameText.text = currentDialouge.CharacterName;
@@ -197,12 +199,16 @@ public class DialogueTextManager : MonoBehaviour
 
     private void EndDialogue()
     {
-        isInDialouge = false;
+        
         print("Dialogue ended" + isInDialouge);
         StartCoroutine(moveDialogueBox());
         onDialogueEnd?.Invoke();
-        if (LocationManager.Instance.currentEvent != null)
+        if (LocationManager.Instance.currentEvent != null && LocationManager.Instance.isTraining)
+        {
+            print("Ending training from dialogue manager");
+            LocationManager.Instance.isTraining = false;
             LocationManager.Instance.EndTraining();
+        }
     }
 
     private void OnChoiceSelected(int choiceIndex)
@@ -260,7 +266,7 @@ public class DialogueTextManager : MonoBehaviour
                 timeElapsed += Time.deltaTime;
                 yield return null; 
             }
-
+            isInDialouge = false;
             TextContainer.GetComponent<RectTransform>().position = offscreenPosition; 
             DisableTextClick();
         }
