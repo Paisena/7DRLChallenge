@@ -1,11 +1,9 @@
 using System.Collections;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using UnityEditor.SceneManagement;
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
@@ -339,7 +337,7 @@ public class DialogueTextManagerInspector : Editor
             manager.offscreenPosition = manager.TextContainer.GetComponent<RectTransform>().position;
 
             EditorUtility.SetDirty(manager);
-            EditorSceneManager.MarkSceneDirty(manager.gameObject.scene);
+            //EditorSceneManager.MarkSceneDirty(manager.gameObject.scene);
         }
         if(GUILayout.Button("Set OnScreen Position"))
         {
@@ -348,7 +346,7 @@ public class DialogueTextManagerInspector : Editor
             manager.onscreenPosition = manager.TextContainer.GetComponent<RectTransform>().position;
 
             EditorUtility.SetDirty(manager);
-            EditorSceneManager.MarkSceneDirty(manager.gameObject.scene);
+            //EditorSceneManager.MarkSceneDirty(manager.gameObject.scene);
         }
     }
 }
