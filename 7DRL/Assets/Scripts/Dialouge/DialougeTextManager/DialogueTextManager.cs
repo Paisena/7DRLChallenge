@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 using System.Linq;
+using UnityEngine.TextCore.Text;
 
 
 [RequireComponent(typeof(TextMeshProUGUI))]
@@ -35,7 +36,11 @@ public class DialogueTextManager : MonoBehaviour
         set
         {
             _IsInDialouge = value;
-            characterIconRenderer.enabled = value;
+            if (characterIconRenderer.sprite != null)
+            {
+                print(characterIconRenderer);
+                characterIconRenderer.enabled = value;
+            }
         }
     }
 
@@ -159,6 +164,14 @@ public class DialogueTextManager : MonoBehaviour
 
         currentDialouge = currentDialouge.Choices[0].NextDialouge;
         // check if the next dialouge has multiple choices
+        if (currentDialouge.CharacterIcon == null)
+        {
+            characterIconRenderer.enabled = false;
+        }
+        else
+        {
+            characterIconRenderer.enabled = true;
+        }
         if(currentDialouge.Choices.Count > 1)
         {
             //disable input outside of the button.

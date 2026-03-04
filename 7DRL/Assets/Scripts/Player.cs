@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -5,8 +6,14 @@ public class Player : MonoBehaviour
     public string playerName;
     public float[] Stats;
     // not one hundred percent sure the names of the stats so probably change later
-    public string[] statNames;
     public string[] items;
+    public enum StatIndex
+    {
+        Strength,
+        Intelligence,
+        Charisma,
+        Style
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -39,7 +46,9 @@ public class Player : MonoBehaviour
                 StatText statText = childGO.GetComponent<StatText>();
                 if (statText != null)
                 {
-                    statText.UpdateStatText(statNames[i], Stats[i]);
+                    StatIndex statEnum = (StatIndex)i;
+                    string statTitle = statEnum.ToString();
+                    statText.UpdateStatText(statTitle, Stats[i]);
                 }
             }
             else
@@ -47,23 +56,5 @@ public class Player : MonoBehaviour
                 print("could not find stat text for " + "Stat" + (i + 1));
             }
         }
-
-        // for (int i = 0; i < Stats.Length; i++)
-        // {
-        //     print("updating stat text for stat " + statNames[i] + " with value " + Stats[i]);
-
-        //     if (statTextObject != null)
-        //     {
-        //         StatText statText = statTextObject.GetComponent<StatText>();
-        //         if (statText != null)
-        //         {
-        //             statText.UpdateStatText(statNames[i], Stats[i]);
-        //         }
-        //     }
-        //     else
-        //     {
-        //         print("could not find stat text for " + "Stat" + (i + 1));
-        //     }
-        // }
     }
 }

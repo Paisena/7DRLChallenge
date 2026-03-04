@@ -25,12 +25,12 @@ public class TrainingEventManager : MonoBehaviour
 
     public void GenerateEventLocation()
     {
-        print("Generating event location");
+        //print("Generating event location");
         // roll to see if an event will occur
         int eventRoll = Random.Range(0, 100);
         if (eventRoll >= eventChance) 
         {
-            print($"event roll is {eventRoll} and event chance is {eventChance} so no event will occur");
+            //print($"event roll is {eventRoll} and event chance is {eventChance} so no event will occur");
             return;
         }
         // check what events are possible based on the progression of events given each location and the current target mood
@@ -42,12 +42,12 @@ public class TrainingEventManager : MonoBehaviour
         {
                 if(trainingEvent.eventStage == locations[(int)trainingEvent.locationRequirement].LocationEventIndex && trainingEvent.targetMoodRequirement == TargetManager.Instance.currentTarget.targetMood)
                 {
-                    print("Event " + trainingEvent.EventName + " is possible");
+                    //print("Event " + trainingEvent.EventName + " is possible");
                     possibleEvents.Add(trainingEvent);
                 }
                 else
                 {
-                    print("Event " + trainingEvent.EventName + " is not possible because the event stage is " + trainingEvent.eventStage + " and the location event index is " + locations[(int)trainingEvent.locationRequirement].LocationEventIndex + " or the target mood requirement is " + trainingEvent.targetMoodRequirement + " and the current target mood is " + TargetManager.Instance.currentTarget.targetMood);
+                    //print("Event " + trainingEvent.EventName + " is not possible because the event stage is " + trainingEvent.eventStage + " and the location event index is " + locations[(int)trainingEvent.locationRequirement].LocationEventIndex + " or the target mood requirement is " + trainingEvent.targetMoodRequirement + " and the current target mood is " + TargetManager.Instance.currentTarget.targetMood);
                 }
         }
 

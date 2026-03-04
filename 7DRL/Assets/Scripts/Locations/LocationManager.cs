@@ -36,13 +36,7 @@ public class LocationManager : MonoBehaviour
         LocationFour
     }
 
-    public enum StatIndex
-    {
-        Strength,
-        Intelligence,
-        Charisma,
-        Style
-    }
+    
 
     public static event Action onTrainingEnded;
      void Awake()
@@ -301,7 +295,7 @@ public class LocationManager : MonoBehaviour
     public void BeginBasicTraining(Location location)
     {
         // figure out which location is being trained
-        string text = $"Trained {location.baseStatIncrease} {Enum.GetName(typeof(StatIndex), location.statIndex)}";
+        string text = $"Trained {location.baseStatIncrease} {Enum.GetName(typeof(Player.StatIndex), location.statIndex)}";
         // start dialogue which tells the player what stat they trained 
         DialougeSO dialouge = DialogueTextManager.Instance.GenerateDialogue("", text, "", null, DialougeTypes.SingleChoice, true);
         DialogueTextManager.Instance.StartDialouge(dialouge);
