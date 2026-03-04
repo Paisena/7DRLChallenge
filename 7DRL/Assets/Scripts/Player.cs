@@ -3,7 +3,6 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public string playerName;
-    public float[] _stats;
     public float[] Stats;
     // not one hundred percent sure the names of the stats so probably change later
     public string[] statNames;
@@ -27,18 +26,44 @@ public class Player : MonoBehaviour
 
     public void UpdateStatText()
     {
-        for (int i = 0; i < Stats.Length; i++)
+        GameObject statTextObject = GameObject.Find("Stats"); // find the stat text object based on the index
+        
+        print($"{statTextObject.transform.childCount} children in stat text object");
+        for (int i = 0; i < statTextObject.transform.childCount; i++)
         {
-            GameObject statTextObject = GameObject.Find("Stat" + (i + 1)); // find the stat text object based on the index
+            Transform child = statTextObject.transform.GetChild(i);
+            GameObject childGO = child.gameObject;
 
-            if (statTextObject != null)
+            if (childGO != null)
             {
-                StatText statText = statTextObject.GetComponent<StatText>();
+                StatText statText = childGO.GetComponent<StatText>();
                 if (statText != null)
                 {
                     statText.UpdateStatText(statNames[i], Stats[i]);
                 }
             }
+            else
+            {
+                print("could not find stat text for " + "Stat" + (i + 1));
+            }
         }
+
+        // for (int i = 0; i < Stats.Length; i++)
+        // {
+        //     print("updating stat text for stat " + statNames[i] + " with value " + Stats[i]);
+
+        //     if (statTextObject != null)
+        //     {
+        //         StatText statText = statTextObject.GetComponent<StatText>();
+        //         if (statText != null)
+        //         {
+        //             statText.UpdateStatText(statNames[i], Stats[i]);
+        //         }
+        //     }
+        //     else
+        //     {
+        //         print("could not find stat text for " + "Stat" + (i + 1));
+        //     }
+        // }
     }
 }

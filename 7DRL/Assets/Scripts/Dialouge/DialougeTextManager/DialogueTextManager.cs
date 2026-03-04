@@ -28,7 +28,17 @@ public class DialogueTextManager : MonoBehaviour
     [SerializeField] public Vector3 onscreenPosition;
     [SerializeField] private float duration = 1f;
     public GameObject TextContainer;
-    public bool isInDialouge;
+    private bool _IsInDialouge = false;
+    public bool IsInDialouge
+    {
+        get => _IsInDialouge;
+        set
+        {
+            _IsInDialouge = value;
+            characterIconRenderer.enabled = value;
+        }
+    }
+
     public enum ChoiceReuirementTypes
     {
         statOne,
@@ -125,7 +135,7 @@ public class DialogueTextManager : MonoBehaviour
         characterIconRenderer.sprite = currentDialouge.CharacterIcon;
         LocationManager.Instance.DisableTrainingHUD();
 
-        isInDialouge = true;
+        IsInDialouge = true;
         
         onDialogueStart?.Invoke();
         StartCoroutine(moveDialogueBox());
@@ -200,7 +210,7 @@ public class DialogueTextManager : MonoBehaviour
     private void EndDialogue()
     {
         
-        print("Dialogue ended" + isInDialouge);
+        print("Dialogue ended" + IsInDialouge);
         StartCoroutine(moveDialogueBox());
         onDialogueEnd?.Invoke();
         if (LocationManager.Instance.currentEvent != null && LocationManager.Instance.isTraining)
@@ -266,7 +276,7 @@ public class DialogueTextManager : MonoBehaviour
                 timeElapsed += Time.deltaTime;
                 yield return null; 
             }
-            isInDialouge = false;
+            IsInDialouge = false;
             TextContainer.GetComponent<RectTransform>().position = offscreenPosition; 
             DisableTextClick();
         }
@@ -319,6 +329,25 @@ public class DialogueTextManager : MonoBehaviour
             }
         }
         return true;
+    }
+
+    public DialougeSO GenerateDialogue(string dialougeName, 
+    string text, 
+    string characterName, 
+    Sprite characterIcon, 
+    DialougeTypes dialougeTypes, 
+    bool isStartingDialouge, 
+    List<DialougeChoiceData> choices = null)
+    {
+        DialougeSO newDialouge = ScriptableObject.CreateInstance<DialougeSO>();
+        if (choices == null)
+        {
+            choices = new List<DialougeChoiceData>();
+            choices.Add(new DialougeChoiceData { Name = "Continue", Text = "Continue", Requirements = "", NextDialouge = null });
+
+        }
+        newDialouge.Initialize(dialougeName, text, characterName, characterIcon, choices, dialougeTypes, isStartingDialouge);
+        return newDialouge;
     }
 }
 

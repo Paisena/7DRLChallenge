@@ -37,7 +37,7 @@ public class GameTime : MonoBehaviour
 
     public IEnumerator CheckStageEnd()
     {
-        yield return new WaitUntil(() => DialogueTextManager.Instance.isInDialouge == false);
+        yield return new WaitUntil(() => DialogueTextManager.Instance.IsInDialouge == false);
         if (CurrentTurn > 0 && CurrentTurn % TotalTurnsPerStage == 0)
         {
             // trigger stage end event

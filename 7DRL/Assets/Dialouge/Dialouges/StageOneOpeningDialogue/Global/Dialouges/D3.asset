@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialougeSO
   <DialougeName>k__BackingField: D3
   <CharacterName>k__BackingField: 
-  <CharacterIcon>k__BackingField: {fileID: 21300000, guid: 7950ddc3d08a95949b73408118e6376c, type: 3}
+  <CharacterIcon>k__BackingField: {fileID: -7943720702334105097, guid: e3babd2a0d3396448be71b94d807cdaf, type: 3}
   <Text>k__BackingField: Begin the training stage now!
   <Choices>k__BackingField:
   - <Name>k__BackingField: 

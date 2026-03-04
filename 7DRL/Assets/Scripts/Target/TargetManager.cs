@@ -56,7 +56,7 @@ public class TargetManager : MonoBehaviour
             // Trigger the dialogue for the mood event
             DialogueTextManager.Instance.StartDialouge(moodEvents[moodEventIndex].dialouge);
             moodEventText.SetMoodEventText(currentTarget.targetMood.ToString());
-            yield return new WaitUntil(() => DialogueTextManager.Instance.isInDialouge == false);
+            yield return new WaitUntil(() => DialogueTextManager.Instance.IsInDialouge == false);
             LocationManager.Instance.EnableTrainingHUD();
         }
         onMoodEventOver?.Invoke();

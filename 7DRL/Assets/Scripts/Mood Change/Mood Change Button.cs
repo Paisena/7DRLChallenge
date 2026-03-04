@@ -19,8 +19,8 @@ public class MoodChangeButton : MonoBehaviour
         print("starting mood change dialogue");
         LocationManager.Instance.DisableTrainingHUD();
         DialogueTextManager.Instance.StartDialouge(dialogue);
-        print(DialogueTextManager.Instance.isInDialouge);
-        yield return new WaitUntil(() => DialogueTextManager.Instance.isInDialouge == false);
+        print(DialogueTextManager.Instance.IsInDialouge);
+        yield return new WaitUntil(() => DialogueTextManager.Instance.IsInDialouge == false);
         print("isInDialouge is false, re-enabling training HUD");
         LocationManager.Instance.EnableTrainingHUD();
     }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LocationManager : MonoBehaviour
@@ -33,6 +34,14 @@ public class LocationManager : MonoBehaviour
         LocationTwo,
         LocationThree,
         LocationFour
+    }
+
+    public enum StatIndex
+    {
+        Strength,
+        Intelligence,
+        Charisma,
+        Style
     }
 
     public static event Action onTrainingEnded;
@@ -75,7 +84,7 @@ public class LocationManager : MonoBehaviour
     {
         DialogueTextManager.Instance.currentDialouge = StageOpeningDialogue[0];
         DialogueTextManager.Instance.StartDialouge();
-        yield return new WaitUntil(() => DialogueTextManager.Instance.isInDialouge == false);
+        yield return new WaitUntil(() => DialogueTextManager.Instance.IsInDialouge == false);
         EnableTrainingHUD();
     }
 
@@ -86,11 +95,11 @@ public class LocationManager : MonoBehaviour
 
     public IEnumerator ConfessionScenario()
     {
-        yield return new WaitUntil(() => DialogueTextManager.Instance.isInDialouge == false);
+        yield return new WaitUntil(() => DialogueTextManager.Instance.IsInDialouge == false);
         DisableTrainingHUD();
         DialogueTextManager.Instance.currentDialouge = ConfessionDialogue[currentStageIndex];
         DialogueTextManager.Instance.StartDialouge();
-        yield return new WaitUntil(() => DialogueTextManager.Instance.isInDialouge == false);
+        yield return new WaitUntil(() => DialogueTextManager.Instance.IsInDialouge == false);
         
         if (!TargetManager.Instance.currentTarget.gameOver)
         {
@@ -119,11 +128,13 @@ public class LocationManager : MonoBehaviour
             StartTrainingDialogue(location.currentTrainingEvent);
             return;
         }
+        else
+        {
+            BeginBasicTraining(location);
+        }
         // update stats based on the location's base stat increase and the player's current stats
-        player.Stats[location.statIndex] += location.baseStatIncrease;
         
         player.UpdateStatText();
-
         endTraining();
         return;
     }
@@ -285,5 +296,20 @@ public class LocationManager : MonoBehaviour
         CurrentLocations[3].UpdateLocationInfo(LocationFourInfo[currentStageIndex]);
 
         return;
+    }
+
+    public void BeginBasicTraining(Location location)
+    {
+        // figure out which location is being trained
+        string text = $"Trained {location.baseStatIncrease} {Enum.GetName(typeof(StatIndex), location.statIndex)}";
+        // start dialogue which tells the player what stat they trained 
+        DialougeSO dialouge = DialogueTextManager.Instance.GenerateDialogue("", text, "", null, DialougeTypes.SingleChoice, true);
+        DialogueTextManager.Instance.StartDialouge(dialouge);
+
+        //update stats on screen 
+        player.Stats[location.statIndex] += location.baseStatIncrease;
+        
+        player.UpdateStatText();
+
     }
 }

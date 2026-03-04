@@ -10,5 +10,6 @@ public class StatText : MonoBehaviour
     {
         statTitleText.text = statTitle;
         statValueText.text = statValue.ToString();
+        print("updated stat text");
     }
 }
