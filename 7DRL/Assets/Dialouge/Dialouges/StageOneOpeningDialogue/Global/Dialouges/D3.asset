@@ -19,7 +19,7 @@ MonoBehaviour:
   <Choices>k__BackingField:
   - <Name>k__BackingField: 
     <Text>k__BackingField: Next Dialouge
-    <Requirements>k__BackingField: 
+    <Requirements>k__BackingField: progress:1000
     <NextDialouge>k__BackingField: {fileID: 0}
   <DialougeTypes>k__BackingField: 0
   <IsStartingDialouge>k__BackingField: 0

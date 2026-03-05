@@ -1,0 +1,210 @@
+fileFormatVersion: 2
+guid: e2eb185d04b938c4c9728c81b30000cb
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3800782402952206127
+    second: TextBox_0
+  - first:
+      213: -7117176613107577440
+    second: TextBox_1
+  - first:
+      213: -214718753063088332
+    second: TextBox_2
+  - first:
+      213: 9156156023691482455
+    second: TextBox_3
+  - first:
+      213: -5155470640856005881
+    second: TextBox_4
+  - first:
+      213: -8524845755614569565
+    second: TextBox_5
+  - first:
+      213: 7617928129906251855
+    second: TextBox_6
+  - first:
+      213: 36453689603369299
+    second: TextBox_7
+  - first:
+      213: 3882693691918793871
+    second: TextBox_8
+  - first:
+      213: -2180455226332543036
+    second: TextBox_9
+  - first:
+      213: -7224587817113676327
+    second: TextBox_10
+  - first:
+      213: -3999316065291877797
+    second: TextBox_11
+  - first:
+      213: -351348561788081253
+    second: TextBox_12
+  - first:
+      213: 4654127433726271893
+    second: TextBox_13
+  - first:
+      213: 6186583460146708307
+    second: TextBox_14
+  - first:
+      213: -788576375567086289
+    second: TextBox_15
+  - first:
+      213: -1182957919806561617
+    second: TextBox_16
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 200
+  spriteBorder: {x: 210, y: 105, z: 201, w: 146}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: TextBox_6
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 98
+        width: 319
+        height: 312
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 100, y: 100, z: 100, w: 100}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f48948bc54158b960800000000000000
+      internalID: 7617928129906251855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: b3d16399038e3fd478bbed11abb7295b
+    internalID: 1294820494
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      TextBox_0: 3800782402952206127
+      TextBox_1: -7117176613107577440
+      TextBox_10: -7224587817113676327
+      TextBox_11: -3999316065291877797
+      TextBox_12: -351348561788081253
+      TextBox_13: 4654127433726271893
+      TextBox_14: 6186583460146708307
+      TextBox_15: -788576375567086289
+      TextBox_16: -1182957919806561617
+      TextBox_17: 1061633438
+      TextBox_2: -214718753063088332
+      TextBox_3: 9156156023691482455
+      TextBox_4: -5155470640856005881
+      TextBox_5: -8524845755614569565
+      TextBox_6: 7617928129906251855
+      TextBox_7: 36453689603369299
+      TextBox_8: 3882693691918793871
+      TextBox_9: -2180455226332543036
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

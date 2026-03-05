@@ -7,7 +7,7 @@ public class MoodChangeButton : MonoBehaviour
     public DialougeSO dialogue;
     public void Start()
     {
-        OriginalPosition = transform.position;
+        // OriginalPosition = transform.position;
     }
     public void EnableMoodChangeHud()
     {

@@ -29,6 +29,7 @@ public class DialogueTextManager : MonoBehaviour
     [SerializeField] public Vector3 onscreenPosition;
     [SerializeField] private float duration = 1f;
     public GameObject TextContainer;
+    public bool isDialogueBoxOnScreen = false;
     private bool _IsInDialouge = false;
     public bool IsInDialouge
     {
@@ -98,6 +99,11 @@ public class DialogueTextManager : MonoBehaviour
     }
     private void Start()
     {
+        // set position of where textbox should be based on screen size
+        offscreenPosition.x = Screen.width /2 + TextContainer.GetComponent<RectTransform>().rect.width / 2;
+        onscreenPosition.x = Screen.width /2 + TextContainer.GetComponent<RectTransform>().rect.width / 2;
+        onscreenPosition.y = SetToBottomOfScreen(TextContainer).y;
+
         TextContainer.GetComponent<RectTransform>().position = offscreenPosition;
         dialogueText.enabled = false;
 
@@ -123,6 +129,25 @@ public class DialogueTextManager : MonoBehaviour
 
     private void OnClick(InputAction.CallbackContext ctx)
     {
+        // check if previous dialogueSO had the requirement of increasing the progress meter, if so increase it here
+        if (currentDialouge.Choices.Count == 1 && !string.IsNullOrEmpty(currentDialouge.Choices[0].Requirements))
+        {
+            int progressValue = ChoiceDataParser.GetProgressValue(currentDialouge.Choices[0].Requirements);
+            if (progressValue != 0)
+            {
+                // if this choice has a progress requirement, increase the progress meter by that amount
+            TargetManager.Instance.ChangeProgressMeter(progressValue);
+            print("Progress Meter Increased by: " + progressValue);
+            }
+            else
+            {
+                print("No progress value to increase");
+            }
+            // play animation
+
+            // check if progress meter is full, if so trigger mood event
+        }
+
         NextDialouge();
         //print($"going to dialouge: {currentDialouge.DialougeName}");
     }
@@ -166,6 +191,8 @@ public class DialogueTextManager : MonoBehaviour
         currentDialouge = currentDialouge.Choices[0].NextDialouge;
         CheckIfSpriteNull();
         CheckIfNameNull();
+
+        // check if this dialogue has a requrement for progress, if so add
         
         
         // check if the next dialouge has multiple choices
@@ -244,7 +271,6 @@ public class DialogueTextManager : MonoBehaviour
     private void EndDialogue()
     {
         
-        print("Dialogue ended" + IsInDialouge);
         StartCoroutine(moveDialogueBox());
         onDialogueEnd?.Invoke();
         if (LocationManager.Instance.currentEvent != null && LocationManager.Instance.isTraining)
@@ -287,19 +313,22 @@ public class DialogueTextManager : MonoBehaviour
 
     private IEnumerator moveDialogueBox()
     {
+        offscreenPosition.x = 0f;
+        onscreenPosition.x = 0f;
+        onscreenPosition.y = 0f + 235f;
         float timeElapsed = 0f;
-        if (TextContainer.GetComponent<RectTransform>().position == offscreenPosition)
+        if (!isDialogueBoxOnScreen)
         {
             // move it on screen
             timeElapsed = 0f;
             while (timeElapsed < duration)
             {
-                TextContainer.GetComponent<RectTransform>().position = Vector3.Lerp(offscreenPosition, onscreenPosition, timeElapsed / duration);
+                TextContainer.GetComponent<RectTransform>().anchoredPosition = Vector3.Lerp(offscreenPosition, onscreenPosition, timeElapsed / duration);
                 timeElapsed += Time.deltaTime;
                 yield return null; 
             }
 
-            TextContainer.GetComponent<RectTransform>().position = onscreenPosition; 
+            TextContainer.GetComponent<RectTransform>().anchoredPosition = onscreenPosition; 
             EnableTextClick();
         }
         else
@@ -308,14 +337,15 @@ public class DialogueTextManager : MonoBehaviour
              timeElapsed = 0f;
             while (timeElapsed < duration)
             {
-                TextContainer.GetComponent<RectTransform>().position = Vector3.Lerp(onscreenPosition, offscreenPosition, timeElapsed / duration);
+                TextContainer.GetComponent<RectTransform>().anchoredPosition = Vector3.Lerp(onscreenPosition, offscreenPosition, timeElapsed / duration);
                 timeElapsed += Time.deltaTime;
                 yield return null; 
             }
             IsInDialouge = false;
-            TextContainer.GetComponent<RectTransform>().position = offscreenPosition; 
+            TextContainer.GetComponent<RectTransform>().anchoredPosition = offscreenPosition; 
             DisableTextClick();
         }
+        isDialogueBoxOnScreen = !isDialogueBoxOnScreen;
     }
 
     public bool DoesPlayerMeetRequirements(string requirements)
@@ -384,6 +414,32 @@ public class DialogueTextManager : MonoBehaviour
         }
         newDialouge.Initialize(dialougeName, text, characterName, characterIcon, choices, dialougeTypes, isStartingDialouge);
         return newDialouge;
+    }
+
+    private Vector3 SetToBottomOfScreen(GameObject go)
+    {
+        RectTransform[] children = go.GetComponentsInChildren<RectTransform>();
+
+        float lowestY = float.MaxValue;
+
+        foreach (RectTransform child in children)
+        {
+            if (child == go.GetComponent<RectTransform>()) continue;
+
+            Vector3[] corners = new Vector3[4];
+            child.GetWorldCorners(corners);
+
+            float childBottom = child.anchoredPosition.y - (child.rect.height * child.pivot.y);
+ // bottom-left corner
+
+            if (childBottom < lowestY)
+                lowestY = childBottom;
+        }
+
+        float offset = -lowestY;
+
+        return new Vector3(0, offset, 0);
+
     }
 }
 

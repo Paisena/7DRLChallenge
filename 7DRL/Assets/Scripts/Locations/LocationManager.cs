@@ -183,11 +183,12 @@ public class LocationManager : MonoBehaviour
         DisableTrainingStats();
         DisableTrainingYear();
         DisableTrainingMood();
-        DisableMoodChange();
+        //DisableMoodChange();
     }
 
     public void DisableMoodChange()
     {
+        print("Disabling Mood Change");
         // needs to be enabled for it to function so i will jsut throw it off the map
         if (MoodChangeObject != null)
         {
@@ -233,7 +234,7 @@ public class LocationManager : MonoBehaviour
         EnableTrainingStats();
         EnableTrainingYear();
         EnableTrainingMood();
-        EnableMoodChange();
+        //EnableMoodChange();
     }
     
     public void EnableMoodChange()
