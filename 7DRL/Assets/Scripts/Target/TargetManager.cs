@@ -21,6 +21,7 @@ public class TargetManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        moodEventText.SetMoodEventText(currentTarget.targetMood.ToString());
     }
 
     void OnEnable()

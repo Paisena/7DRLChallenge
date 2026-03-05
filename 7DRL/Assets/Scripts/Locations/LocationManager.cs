@@ -305,7 +305,6 @@ public class LocationManager : MonoBehaviour
         
         player.UpdateStatText();
         endTraining();
-
     }
 
     public void BeginBasicTraining(Location location)

@@ -4737,6 +4737,10 @@ PrefabInstance:
       propertyPath: offscreenPosition.y
       value: -41.166656
       objectReference: {fileID: 0}
+    - target: {fileID: 6225501570031321330, guid: 608b28f20e54b434888fdb683472de0d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5873998244472221692, guid: 608b28f20e54b434888fdb683472de0d, type: 3}
     m_RemovedGameObjects:

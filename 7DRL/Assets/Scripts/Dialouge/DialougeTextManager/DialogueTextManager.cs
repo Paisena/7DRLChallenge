@@ -142,6 +142,8 @@ public class DialogueTextManager : MonoBehaviour
         IsInDialouge = true;
         
         onDialogueStart?.Invoke();
+        CheckIfSpriteNull();
+        CheckIfNameNull();
         StartCoroutine(moveDialogueBox());
     }
 
@@ -163,6 +165,7 @@ public class DialogueTextManager : MonoBehaviour
 
         currentDialouge = currentDialouge.Choices[0].NextDialouge;
         CheckIfSpriteNull();
+        CheckIfNameNull();
         
         
         // check if the next dialouge has multiple choices
@@ -221,6 +224,18 @@ public class DialogueTextManager : MonoBehaviour
         }
     }
 
+    private void CheckIfNameNull()
+    {
+        if (string.IsNullOrEmpty(currentDialouge.CharacterName))
+        {
+            nameTextGO.SetActive(false);
+        }
+        else
+        {
+            nameTextGO.SetActive(true);
+        }
+    }
+
     private DialougeSO GetNextDialogue(DialougeSO dialougeSO, int choiceIndex)
     {
         return dialougeSO.Choices[choiceIndex].NextDialouge;
@@ -255,6 +270,8 @@ public class DialogueTextManager : MonoBehaviour
 
         }
         currentDialouge = GetNextDialogue(currentDialouge, choiceIndex);
+        CheckIfSpriteNull();
+        CheckIfNameNull();
         UpdateText();
         foreach (GameObject child in GameObject.FindGameObjectsWithTag("OptionButton"))
         {
