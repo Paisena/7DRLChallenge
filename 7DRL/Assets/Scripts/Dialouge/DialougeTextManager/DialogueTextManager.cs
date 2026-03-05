@@ -313,6 +313,7 @@ public class DialogueTextManager : MonoBehaviour
 
     private IEnumerator moveDialogueBox()
     {
+        DisableTextClick();
         offscreenPosition.x = 0f;
         onscreenPosition.x = 0f;
         onscreenPosition.y = 0f + 235f;
@@ -343,7 +344,7 @@ public class DialogueTextManager : MonoBehaviour
             }
             IsInDialouge = false;
             TextContainer.GetComponent<RectTransform>().anchoredPosition = offscreenPosition; 
-            DisableTextClick();
+            
         }
         isDialogueBoxOnScreen = !isDialogueBoxOnScreen;
     }
