@@ -7,4 +7,5 @@ public class MoodEvent : ScriptableObject
     public DialougeSO dialouge;
     public int WhatStage;
     public Target.Mood MoodChangeTo;
+    public Target.Mood MoodChangeFrom;
 }

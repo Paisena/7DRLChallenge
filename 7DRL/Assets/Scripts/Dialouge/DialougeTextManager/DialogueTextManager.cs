@@ -287,7 +287,6 @@ public class DialogueTextManager : MonoBehaviour
 
     private IEnumerator moveDialogueBox()
     {
-        print("Moving dialogue box");
         float timeElapsed = 0f;
         if (TextContainer.GetComponent<RectTransform>().position == offscreenPosition)
         {
@@ -313,7 +312,6 @@ public class DialogueTextManager : MonoBehaviour
                 timeElapsed += Time.deltaTime;
                 yield return null; 
             }
-            print("Finished moving dialogue box off screen");
             IsInDialouge = false;
             TextContainer.GetComponent<RectTransform>().position = offscreenPosition; 
             DisableTextClick();

@@ -3,10 +3,15 @@ using UnityEngine;
 
 public class GameTimeText : MonoBehaviour
 {
-   public TextMeshProUGUI timeText;
+    public TextMeshProUGUI timeText;
 
-   public void UpdateTimeText(string text)
-   {
-       timeText.text = text;
-   }
+    private void OnEnable()
+    {
+        GameTimeManager.Instance.UpdateTimeText(GameTimeManager.Instance.gameTime.TranslateToTimeUnit());
+    }
+
+    public void UpdateTimeText(string text)
+    {
+        timeText.text = text;
+    }
 }

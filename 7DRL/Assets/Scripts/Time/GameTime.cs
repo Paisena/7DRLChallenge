@@ -12,7 +12,7 @@ public class GameTime : MonoBehaviour
         Summer,
     }
     // Not a set unit of time because it will change over the stages, will have to make a function which translates this number to the correct unit base on the stage
-    private int currentTurn = 0;
+    [SerializeField] private int currentTurn = 0;
     public int CurrentTurn
     {
         get { return currentTurn; }

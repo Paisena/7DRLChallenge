@@ -1659,7 +1659,7 @@ MonoBehaviour:
   currentTarget: {fileID: 1440946350}
   moodEvents:
   - {fileID: 11400000, guid: b7e23ab4f66b54043b092d1bf82e4596, type: 2}
-  MoodEventChance: 10
+  MoodEventChance: 50
   moodEventText: {fileID: 1250226568}
 --- !u!4 &783254912
 Transform:
@@ -4218,7 +4218,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Year 2, january 30
+  m_text: Semester 1, Year 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

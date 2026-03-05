@@ -234,7 +234,6 @@ public class LocationManager : MonoBehaviour
         EnableTrainingYear();
         EnableTrainingMood();
         EnableMoodChange();
-        print("Training HUD enabled");
     }
     
     public void EnableMoodChange()
