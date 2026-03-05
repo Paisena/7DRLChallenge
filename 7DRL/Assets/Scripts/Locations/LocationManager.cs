@@ -125,12 +125,10 @@ public class LocationManager : MonoBehaviour
         else
         {
             BeginBasicTraining(location);
+            return;
         }
         // update stats based on the location's base stat increase and the player's current stats
         
-        player.UpdateStatText();
-        endTraining();
-        return;
     }
 
     private void endTraining()
@@ -292,18 +290,26 @@ public class LocationManager : MonoBehaviour
         return;
     }
 
-    public void BeginBasicTraining(Location location)
+    public  IEnumerator StartBasicTraining(Location location)
     {
+        DisableTrainingHUD();
         // figure out which location is being trained
         string text = $"Trained {location.baseStatIncrease} {Enum.GetName(typeof(Player.StatIndex), location.statIndex)}";
         // start dialogue which tells the player what stat they trained 
         DialougeSO dialouge = DialogueTextManager.Instance.GenerateDialogue("", text, "", null, DialougeTypes.SingleChoice, true);
         DialogueTextManager.Instance.StartDialouge(dialouge);
 
+        yield return new WaitUntil(() => DialogueTextManager.Instance.IsInDialouge == false);
         //update stats on screen 
         player.Stats[location.statIndex] += location.baseStatIncrease;
         
         player.UpdateStatText();
+        endTraining();
 
+    }
+
+    public void BeginBasicTraining(Location location)
+    {
+        StartCoroutine(StartBasicTraining(location));
     }
 }

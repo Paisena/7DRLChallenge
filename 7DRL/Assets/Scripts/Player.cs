@@ -35,7 +35,6 @@ public class Player : MonoBehaviour
     {
         GameObject statTextObject = GameObject.Find("Stats"); // find the stat text object based on the index
         
-        print($"{statTextObject.transform.childCount} children in stat text object");
         for (int i = 0; i < statTextObject.transform.childCount; i++)
         {
             Transform child = statTextObject.transform.GetChild(i);

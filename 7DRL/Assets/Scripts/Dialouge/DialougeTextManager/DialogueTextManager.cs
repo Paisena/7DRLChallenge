@@ -38,7 +38,6 @@ public class DialogueTextManager : MonoBehaviour
             _IsInDialouge = value;
             if (characterIconRenderer.sprite != null)
             {
-                print(characterIconRenderer);
                 characterIconRenderer.enabled = value;
             }
         }
@@ -163,15 +162,10 @@ public class DialogueTextManager : MonoBehaviour
         }
 
         currentDialouge = currentDialouge.Choices[0].NextDialouge;
+        CheckIfSpriteNull();
+        
+        
         // check if the next dialouge has multiple choices
-        if (currentDialouge.CharacterIcon == null)
-        {
-            characterIconRenderer.enabled = false;
-        }
-        else
-        {
-            characterIconRenderer.enabled = true;
-        }
         if(currentDialouge.Choices.Count > 1)
         {
             //disable input outside of the button.
@@ -213,6 +207,18 @@ public class DialogueTextManager : MonoBehaviour
         }
         UpdateText();
         return;
+    }
+
+    private void CheckIfSpriteNull()
+    {
+        if (currentDialouge.CharacterIcon == null)
+        {
+            characterIconRenderer.enabled = false;
+        }
+        else
+        {
+            characterIconRenderer.enabled = true;
+        }
     }
 
     private DialougeSO GetNextDialogue(DialougeSO dialougeSO, int choiceIndex)
@@ -264,6 +270,7 @@ public class DialogueTextManager : MonoBehaviour
 
     private IEnumerator moveDialogueBox()
     {
+        print("Moving dialogue box");
         float timeElapsed = 0f;
         if (TextContainer.GetComponent<RectTransform>().position == offscreenPosition)
         {
@@ -289,6 +296,7 @@ public class DialogueTextManager : MonoBehaviour
                 timeElapsed += Time.deltaTime;
                 yield return null; 
             }
+            print("Finished moving dialogue box off screen");
             IsInDialouge = false;
             TextContainer.GetComponent<RectTransform>().position = offscreenPosition; 
             DisableTextClick();

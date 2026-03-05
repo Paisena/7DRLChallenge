@@ -5122,13 +5122,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   playerName: BOb
-  _stats: []
-  Stats: []
-  statNames:
-  - Cool
-  - SADKJl
-  - askldjasl
-  - ASLKDj
+  Stats:
+  - 0
+  - 0
+  - 0
+  - 0
   items: []
 --- !u!4 &1793379099
 Transform:

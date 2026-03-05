@@ -14,14 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialougeSO
   <DialougeName>k__BackingField: Second
   <CharacterName>k__BackingField: Me
-  <CharacterIcon>k__BackingField: 
+  <CharacterIcon>k__BackingField: {fileID: -7943720702334105097, guid: e3babd2a0d3396448be71b94d807cdaf, type: 3}
   <Text>k__BackingField: Multiple Choices!!!!
   <Choices>k__BackingField:
   - <Name>k__BackingField: 
     <Text>k__BackingField: Third
+    <Requirements>k__BackingField: 
     <NextDialouge>k__BackingField: {fileID: 11400000, guid: 40028afe199352b4f9681a2346a76ec1, type: 2}
   - <Name>k__BackingField: 
     <Text>k__BackingField: Fourth
+    <Requirements>k__BackingField: 
     <NextDialouge>k__BackingField: {fileID: 11400000, guid: 4aac466666f087b4a9461b24c94d072d, type: 2}
   <DialougeTypes>k__BackingField: 1
   <IsStartingDialouge>k__BackingField: 0
