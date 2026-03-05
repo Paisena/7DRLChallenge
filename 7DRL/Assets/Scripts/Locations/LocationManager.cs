@@ -36,8 +36,6 @@ public class LocationManager : MonoBehaviour
         LocationFour
     }
 
-    
-
     public static event Action onTrainingEnded;
      void Awake()
     {
@@ -146,7 +144,7 @@ public class LocationManager : MonoBehaviour
         endTraining();
     }
 
-    public void StartTrainingDialogue(TrainingEventSO trainingEvent)
+    public IEnumerator TrainingDialogue(TrainingEventSO trainingEvent)
     {
         // this function will be called to start the training dialogue for the current event, it will check if there is an event for the current location and if there is it will start the dialogue for that event.
         if (trainingEvent != null)
@@ -155,10 +153,15 @@ public class LocationManager : MonoBehaviour
             DialogueTextManager.Instance.StartDialouge();
         }
         DisableTrainingHUD();
-
-        return;
+        yield return new WaitUntil(() => DialogueTextManager.Instance.IsInDialouge == false);
+        print("training dialogue is over");
+        EndTraining();
     }
 
+    public void StartTrainingDialogue(TrainingEventSO trainingEvent)
+    {
+        StartCoroutine(TrainingDialogue(trainingEvent));
+    }
 
     public void GiveLocationEvent(TrainingEventSO trainingEvent)
     {

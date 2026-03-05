@@ -46,11 +46,11 @@ public class TargetManager : MonoBehaviour
 
     public IEnumerator DecideTargetMood()
     {
-        print("mood event triggered");
         // Roll to see if a mood event happens
         int roll = Random.Range(0, 100);
         if (roll < MoodEventChance) // 30% chance for a mood event to occur
         {
+            print("mood event triggered");
             int moodEventIndex = Random.Range(0, moodEvents.Length);
             currentTarget.targetMood = moodEvents[moodEventIndex].MoodChangeTo;
 

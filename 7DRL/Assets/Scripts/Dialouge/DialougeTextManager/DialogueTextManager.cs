@@ -277,7 +277,7 @@ public class DialogueTextManager : MonoBehaviour
         {
             print("Ending training from dialogue manager");
             LocationManager.Instance.isTraining = false;
-            LocationManager.Instance.EndTraining();
+            
         }
     }
 

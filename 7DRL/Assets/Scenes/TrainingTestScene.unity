@@ -4225,12 +4225,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1571695011}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f06b7ca370990442802266f943f2ce9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoodChangeButton
-  OriginalPosition: {x: 0, y: 0, z: 0}
+  OriginalPosition: {x: 1000, y: 100, z: 0}
   dialogue: {fileID: 11400000, guid: d8bde96c0b8d744499f3cc810466aeb7, type: 2}
 --- !u!1001 &1574571958
 PrefabInstance:
@@ -4921,7 +4921,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2945056206609794311, guid: 608b28f20e54b434888fdb683472de0d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 236
+      value: -611
       objectReference: {fileID: 0}
     - target: {fileID: 2945056206609794311, guid: 608b28f20e54b434888fdb683472de0d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
