@@ -209,21 +209,28 @@ public class DialogueTextManager : MonoBehaviour
                 Button optionButton = Instantiate(optionButtonPrefab, new Vector2(0,0), Quaternion.identity, transform.parent);
                 optionButton.transform.SetParent(GameObject.Find("Canvas").transform, false);
                 RectTransform optionButtonRect = optionButtonTransform.GetComponent<RectTransform>();
-                Vector2 buttonPos = new Vector2(optionButtonRect.anchoredPosition.x, optionButtonRect.anchoredPosition.y - (i * optionButtonPrefab.GetComponent<RectTransform>().rect.height)); 
+                Vector2 buttonPos = new Vector2(optionButtonRect.anchoredPosition.x, optionButtonRect.anchoredPosition.y - (i * optionButtonPrefab.GetComponent<RectTransform>().rect.height) + 2); 
                 
                 optionButton.GetComponent<RectTransform>().anchoredPosition = buttonPos;
                 optionButton.GetComponentInChildren<TextMeshProUGUI>().text = currentDialouge.Choices[i].Text + " Button";
+                
+                // change width of button based on text length but only extend it from one size so it stays lined up with the other buttons
+                float textWidth = optionButton.GetComponentInChildren<TextMeshProUGUI>().preferredWidth;
+                float padding = 20f; // adjust this value for more or less padding
+                optionButton.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, textWidth + padding);
+                optionButton.GetComponent<RectTransform>().anchoredPosition += new Vector2(textWidth / 2 - 70f, 0); // move the button to the right based on the new width
+
 
                 // Check if player has stats for option 
                 if (!string.IsNullOrEmpty(currentDialouge.Choices[i].Requirements))
                 {
                     if(DoesPlayerMeetRequirements(currentDialouge.Choices[i].Requirements))
                     {
-                        optionButton.interactable = true;
+                        optionButton.enabled = true;
                     }
                     else
                     {
-                        optionButton.interactable = false;
+                        optionButton.enabled = false;
                     }
                 }
                 else
