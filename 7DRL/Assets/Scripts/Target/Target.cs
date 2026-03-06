@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
-    public event Action<int> onProgressValueChanged;
+    public event Action<float> onProgressValueChanged;
     public string TargetName;
     public string TargetDescription;
     public enum Mood
@@ -14,16 +14,16 @@ public class Target : MonoBehaviour
         
     }    
     public Mood targetMood;
-    private int _progressValue;
-    public int progressValue
+    private float _progressValue;
+    public float progressValue
     {
         get => _progressValue;
         set
         {
-            int oldValue = _progressValue;
+            float oldValue = _progressValue;
             _progressValue = value;
 
-            int delta = progressValue - oldValue;
+            float delta = progressValue - oldValue;
 
             onProgressValueChanged?.Invoke(delta);
 

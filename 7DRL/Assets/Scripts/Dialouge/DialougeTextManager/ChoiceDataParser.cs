@@ -28,10 +28,10 @@ public class ChoiceDataParser : MonoBehaviour
         return requirements;
     }
 
-    public static int GetProgressValue(string choiceText)
+    public static float GetProgressValue(string choiceText)
     {
         ParseChoiceData(choiceText).TryGetValue(DialogueTextManager.ChoiceReuirementTypes.progress, out string progressValue);
-        if (int.TryParse(progressValue, out int result))
+        if (float.TryParse(progressValue, out float result))
         {
             return result;
         }

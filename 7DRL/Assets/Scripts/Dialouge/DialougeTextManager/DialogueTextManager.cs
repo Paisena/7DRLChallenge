@@ -132,12 +132,13 @@ public class DialogueTextManager : MonoBehaviour
         // check if previous dialogueSO had the requirement of increasing the progress meter, if so increase it here
         if (currentDialouge.Choices.Count == 1 && !string.IsNullOrEmpty(currentDialouge.Choices[0].Requirements))
         {
-            int progressValue = ChoiceDataParser.GetProgressValue(currentDialouge.Choices[0].Requirements);
-            if (progressValue != 0)
+            float progressValue = ChoiceDataParser.GetProgressValue(currentDialouge.Choices[0].Requirements);
+            print("Progress value from requirements: " + progressValue);
+            if (progressValue != 0f)
             {
                 // if this choice has a progress requirement, increase the progress meter by that amount
-            TargetManager.Instance.ChangeProgressMeter(progressValue);
-            print("Progress Meter Increased by: " + progressValue);
+                TargetManager.Instance.ChangeProgressMeter(progressValue);
+                print("Progress Meter Increased by: " + progressValue);
             }
             else
             {
@@ -291,8 +292,8 @@ public class DialogueTextManager : MonoBehaviour
     private void OnChoiceSelected(int choiceIndex)
     {
         print("Choice " + choiceIndex + " selected");
-        int progressValue = ChoiceDataParser.GetProgressValue(currentDialouge.Choices[choiceIndex].Requirements);
-        if (progressValue != 0)
+        float progressValue = ChoiceDataParser.GetProgressValue(currentDialouge.Choices[choiceIndex].Requirements);
+        if (progressValue != 0f)
         {
             // if this choice has a progress requirement, increase the progress meter by that amount
             TargetManager.Instance.ChangeProgressMeter(progressValue);
@@ -450,6 +451,8 @@ public class DialogueTextManager : MonoBehaviour
 
     }
 }
+
+
 
 #if UNITY_EDITOR
 [CustomEditor(typeof(DialogueTextManager))]

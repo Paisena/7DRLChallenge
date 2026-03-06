@@ -14,7 +14,7 @@ public class MeterBarMovement : MonoBehaviour
     {
         target.onProgressValueChanged -= GrowRight;
     }
-    public IEnumerator GrowRightOverTime(int amount)
+    public IEnumerator GrowRightOverTime(float amount)
     {
         float duration  = 1f;
         RectTransform rt = this.GetComponent<RectTransform>();
@@ -34,7 +34,7 @@ public class MeterBarMovement : MonoBehaviour
         rt.sizeDelta = targetSize;
     }   
 
-    public void GrowRight(int value)
+    public void GrowRight(float value)
     {
         print("Growing right by " + value);
         StartCoroutine(GrowRightOverTime(value)); // Example: grow by 10 units over 1 second
