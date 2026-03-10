@@ -18,7 +18,6 @@ public class GrettingGenerator : MonoBehaviour
 
     public string GenerateGreeting()
     {
-        Target target = TargetManager.Instance.currentTarget;
         string greeting = "";
 
         // get current parameters of the target
@@ -27,7 +26,7 @@ public class GrettingGenerator : MonoBehaviour
         List<string> possibleGreetings = new List<string>();
         for (int i = 0; i < greetings.Length; i++)
         {
-            if (greetings[i].targetMood == target.targetMood && greetings[i].progressMeterRequired <= target.progressValue)
+            if (CanSayGreeting(greetings[i]))
             {
                 possibleGreetings.Add(greetings[i].greetingText);
             }
@@ -38,7 +37,22 @@ public class GrettingGenerator : MonoBehaviour
         {
             greeting = possibleGreetings[Random.Range(0, possibleGreetings.Count)];
         }
+        else
+        {
+            print("No possible greetings found for current target parameters.");
+             greeting = "Hello."; // default greeting if no other greetings are possible
+        }
 
         return greeting;
+    }
+
+    public bool CanSayGreeting(GreetingSO greeting)
+    {
+        Target target = TargetManager.Instance.currentTarget;
+        if (greeting.targetMood == target.targetMood && greeting.minProgressMeter < target.progressValue && greeting.maxProgressMeter >= target.progressValue)
+        {
+            return true;
+        }
+        return false;
     }
 }

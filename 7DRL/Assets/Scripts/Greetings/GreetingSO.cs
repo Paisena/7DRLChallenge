@@ -4,6 +4,7 @@ using UnityEngine;
 public class GreetingSO : ScriptableObject
 {
     public Target.Mood targetMood;
-    public int progressMeterRequired;
+    public float minProgressMeter;
+    public float maxProgressMeter;
     public string greetingText;
 }

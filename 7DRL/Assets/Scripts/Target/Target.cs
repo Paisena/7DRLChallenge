@@ -14,7 +14,7 @@ public class Target : MonoBehaviour
         
     }    
     public Mood targetMood;
-    private float _progressValue;
+    [SerializeField] private float _progressValue;
     public float progressValue
     {
         get => _progressValue;
