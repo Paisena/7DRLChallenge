@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4745c5ff8eb3a0242811b7114545feba, type: 3}
   m_Name: Greeting12
   m_EditorClassIdentifier: Assembly-CSharp::GreetingSO
-  targetMood: 1
+  targetMood: 2
   minProgressMeter: 0.4
   maxProgressMeter: 0.8
   greetingText: AHHHH Why is my day so badddddd
