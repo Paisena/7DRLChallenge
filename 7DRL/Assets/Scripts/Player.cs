@@ -1,12 +1,14 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     public string playerName;
     public float[] Stats;
+    public float[] statMultipler = new float[4];
     // not one hundred percent sure the names of the stats so probably change later
-    public string[] items;
+    public Inventory inventory;
     public enum StatIndex
     {
         Strength,
@@ -22,6 +24,11 @@ public class Player : MonoBehaviour
         {
             Stats[i] = 10; 
         }
+
+        for (int i = 0; i < statMultipler.Length; i++)
+        {
+            statMultipler[i] = 1; 
+        }
         UpdateStatText();
     }
 
@@ -30,6 +37,17 @@ public class Player : MonoBehaviour
     {
         
     }
+
+    private void OnEnable()
+    {
+        Inventory.OnItemGet += UpdateStatMultipler;
+    }
+
+    private void OnDisable()
+    {
+        Inventory.OnItemGet -= UpdateStatMultipler;
+    }
+
 
     public void UpdateStatText()
     {
@@ -54,6 +72,24 @@ public class Player : MonoBehaviour
             {
                 print("could not find stat text for " + "Stat" + (i + 1));
             }
+        }
+    }
+    public void AddFlatStat(int statIndex, float amount)
+    {
+        Stats[statIndex] += amount;
+        UpdateStatText();
+    }
+    public void ChangeStat(int statIndex, float amount)
+    {
+        Stats[statIndex] += amount * statMultipler[statIndex];
+        UpdateStatText();
+    }
+
+    public void UpdateStatMultipler(Item item)
+    {
+        for (int i = 0; i < statMultipler.Length; i++)
+        {
+            statMultipler[i] += item.statMultipler[i];
         }
     }
 }

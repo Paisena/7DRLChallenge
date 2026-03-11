@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialougeSO
   <DialougeName>k__BackingField: D2
   <CharacterName>k__BackingField: 
-  <CharacterIcon>k__BackingField: {fileID: -7943720702334105097, guid: e3babd2a0d3396448be71b94d807cdaf, type: 3}
+  <CharacterIcon>k__BackingField: {fileID: 0}
   <Text>k__BackingField: Insert introduction to player character and first target
   <Choices>k__BackingField:
   - <Name>k__BackingField: 
@@ -23,3 +23,4 @@ MonoBehaviour:
     <NextDialouge>k__BackingField: {fileID: 11400000, guid: c433d2cb8bc4ebe418b42ba88b48ea4d, type: 2}
   <DialougeTypes>k__BackingField: 0
   <IsStartingDialouge>k__BackingField: 0
+  reward: {fileID: 0}

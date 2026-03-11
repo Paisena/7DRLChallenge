@@ -37,6 +37,7 @@ public class LocationManager : MonoBehaviour
     }
 
     public static event Action onTrainingEnded;
+    public static event Action onTurnOver;
      void Awake()
     {
         if (Instance == null)
@@ -114,7 +115,7 @@ public class LocationManager : MonoBehaviour
         if (location.currentTrainingEvent != null)
         {
             Debug.Log("Current training event: " + location.currentTrainingEvent.EventName);
-            player.Stats[location.currentTrainingEvent.statAffected] += location.currentTrainingEvent.statChangeAmount;
+            player.ChangeStat(location.currentTrainingEvent.statAffected, location.currentTrainingEvent.statChangeAmount);
             isTraining = true;
             // start dialogue 
             StartTrainingDialogue(location.currentTrainingEvent);
@@ -128,12 +129,17 @@ public class LocationManager : MonoBehaviour
         // update stats based on the location's base stat increase and the player's current stats
         
     }
-
-    private void endTraining()
+    public void endTraining()
+    {
+        StartCoroutine(TrainEnd());
+    }
+    private IEnumerator TrainEnd()
     {
         EnableTrainingHUD();
         Destroy(currentEventIcon);
         onTrainingEnded?.Invoke();
+        yield return new WaitUntil(() => TargetManager.Instance.moodEventCheckFailed == true);
+        onTurnOver?.Invoke();
     }
 
     public void EndTraining()
@@ -299,7 +305,7 @@ public class LocationManager : MonoBehaviour
         // figure out which location is being trained
         string text = $"Trained {location.baseStatIncrease} {Enum.GetName(typeof(Player.StatIndex), location.statIndex)}";
         // start dialogue which tells the player what stat they trained 
-        DialougeSO dialouge = DialogueTextManager.Instance.GenerateDialogue("", text, "", null, DialougeTypes.SingleChoice, true);
+        DialougeSO dialouge = DialogueTextManager.Instance.GenerateDialogue("", text, "", null, DialougeTypes.SingleChoice, true, null, false, false);
         DialogueTextManager.Instance.StartDialouge(dialouge);
 
         yield return new WaitUntil(() => DialogueTextManager.Instance.IsInDialouge == false);

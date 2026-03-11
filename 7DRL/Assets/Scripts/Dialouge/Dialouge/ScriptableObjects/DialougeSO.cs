@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "DialougeSO", menuName = "Scriptable Objects/DialougeSO")]
 public class DialougeSO : ScriptableObject
 {
     [field: SerializeField] public string DialougeName { get; set; }
@@ -10,8 +11,12 @@ public class DialougeSO : ScriptableObject
     [field: SerializeField] public List<DialougeChoiceData> Choices { get; set; }
     [field: SerializeField] public DialougeTypes DialougeTypes { get; set; }
     [field: SerializeField] public bool IsStartingDialouge { get; set; }
+    [field: SerializeField] public List<Reward> reward;
+    [field: SerializeField] public bool PickRewardRandom { get; set; }
+    [field: SerializeField] public bool PickWhichReward { get; set; }
 
-    public void Initialize(string dialougeName, string text, string characterName, Sprite characterIcon, List<DialougeChoiceData> choices, DialougeTypes dialougeTypes, bool isStartingDialouge)
+    public void Initialize(string dialougeName, string text, string characterName, Sprite characterIcon, List<DialougeChoiceData> choices, DialougeTypes dialougeTypes, List<Reward> reward, bool isStartingDialouge,
+     bool pickRewardRandom, bool pickWhichReward)
     {
         DialougeName = dialougeName;
         CharacterName = characterName;
@@ -20,5 +25,8 @@ public class DialougeSO : ScriptableObject
         Choices = choices;
         DialougeTypes = dialougeTypes;
         IsStartingDialouge = isStartingDialouge;
+        this.reward = reward;
+        PickRewardRandom = pickRewardRandom;
+        PickWhichReward = pickWhichReward;
     }
 }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialougeSO
   <DialougeName>k__BackingField: D1
   <CharacterName>k__BackingField: 
-  <CharacterIcon>k__BackingField: {fileID: -7943720702334105097, guid: e3babd2a0d3396448be71b94d807cdaf, type: 3}
+  <CharacterIcon>k__BackingField: {fileID: 0}
   <Text>k__BackingField: This is the first thing that should appear when the game
     starts
   <Choices>k__BackingField:
@@ -24,3 +24,4 @@ MonoBehaviour:
     <NextDialouge>k__BackingField: {fileID: 11400000, guid: e7b5739cd063a8249904d05681f36f48, type: 2}
   <DialougeTypes>k__BackingField: 0
   <IsStartingDialouge>k__BackingField: 1
+  reward: {fileID: 0}

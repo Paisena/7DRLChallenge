@@ -18,7 +18,7 @@ public class GrettingGenerator : MonoBehaviour
 
     public string GenerateGreeting()
     {
-        string greeting = "";
+        string greeting;
 
         // get current parameters of the target
 
@@ -40,7 +40,7 @@ public class GrettingGenerator : MonoBehaviour
         else
         {
             print("No possible greetings found for current target parameters.");
-             greeting = "Hello."; // default greeting if no other greetings are possible
+            greeting = "Hello."; // default greeting if no other greetings are possible
         }
 
         return greeting;

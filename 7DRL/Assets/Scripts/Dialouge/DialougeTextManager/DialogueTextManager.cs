@@ -185,6 +185,24 @@ public class DialogueTextManager : MonoBehaviour
         {
             // end of dialouge
             //probably should have a check to see if the next dialouge is the last one or not so that we can create like an end button.
+            if (currentDialouge.reward != null)
+            {
+                if (currentDialouge.PickRewardRandom)
+                {
+                    currentDialouge.reward[UnityEngine.Random.Range(0, currentDialouge.reward.Count)].GiveReward(player);
+                }
+                else if (currentDialouge.PickWhichReward)
+                {
+                    // implement later
+                }
+                else
+                {
+                    foreach (Reward reward in currentDialouge.reward)
+                    {
+                        reward.GiveReward(player);
+                    }
+                }
+            }
             EndDialogue();
             return;
         }
@@ -397,7 +415,7 @@ public class DialogueTextManager : MonoBehaviour
             }
             else if (requirement.Key == ChoiceReuirementTypes.item)
             {
-                if(!player.items.Any(item => item == requirement.Value))
+                if(!player.inventory.HasItem(requirement.Value))
                 {
                     return false;
                 }
@@ -412,6 +430,9 @@ public class DialogueTextManager : MonoBehaviour
     Sprite characterIcon, 
     DialougeTypes dialougeTypes, 
     bool isStartingDialouge, 
+    List<Reward> reward,
+    bool pickRewardRandom,
+    bool pickWhichReward,
     List<DialougeChoiceData> choices = null)
     {
         DialougeSO newDialouge = ScriptableObject.CreateInstance<DialougeSO>();
@@ -421,7 +442,7 @@ public class DialogueTextManager : MonoBehaviour
             choices.Add(new DialougeChoiceData { Name = "Continue", Text = "Continue", Requirements = "", NextDialouge = null });
 
         }
-        newDialouge.Initialize(dialougeName, text, characterName, characterIcon, choices, dialougeTypes, isStartingDialouge);
+        newDialouge.Initialize(dialougeName, text, characterName, characterIcon, choices, dialougeTypes, reward, isStartingDialouge, pickRewardRandom, pickWhichReward);
         return newDialouge;
     }
 

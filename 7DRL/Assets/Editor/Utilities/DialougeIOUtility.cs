@@ -243,7 +243,7 @@ public static class DialougeIOUtility
 
         dialougeContainer.Dialouges.Add(dialouge);
 
-        dialouge.Initialize(node.DialougeName, node.Text, node.CharacterName, node.CharacterIcon, ConvertNodeChoicesToDialougeChoices(node.Choices), node.DialougeType, node.IsStaringNode());
+        dialouge.Initialize(node.DialougeName, node.Text, node.CharacterName, node.CharacterIcon, ConvertNodeChoicesToDialougeChoices(node.Choices), node.DialougeType, node.reward, node.IsStaringNode(), node.pickRandomReward, node.pickWhichReward);
 
         Debug.Log(dialouge.Choices.Count);
         if(ConvertNodeChoicesToDialougeChoices(node.Choices) == null)
@@ -302,6 +302,9 @@ public static class DialougeIOUtility
             CharacterIcon = node.CharacterIcon,
             Choices = choices,
             Text = node.Text,
+            Reward = node.reward,
+            PickRandomReward = node.pickRandomReward,
+            PickWhichReward = node.pickWhichReward,
             DialougeType = node.DialougeType,
             Position = node.GetPosition().position,
         };

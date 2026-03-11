@@ -16,7 +16,9 @@ public class DialougeNode : Node
     public List<DialougeChoiceSavaData> Choices { get; set; }
     public string Text { get; set; }
     public DialougeTypes DialougeType { get; set; }
-
+    public List<Reward> reward; 
+    public bool pickRandomReward;
+    public bool pickWhichReward;
     protected DialougeGraphView graphView;
     
 
@@ -28,6 +30,9 @@ public class DialougeNode : Node
         CharacterName = "New Character";
         CharacterIcon = null;
         Choices = new List<DialougeChoiceSavaData>();
+        reward = new List<Reward>();
+        pickRandomReward = false;
+        pickWhichReward = false;
         Text = "New Text";
         SetPosition(new Rect(position, Vector2.zero));
     }
@@ -97,6 +102,67 @@ public class DialougeNode : Node
         });
 
         textFoldout.Add(characterIcon);
+
+
+        ObjectField rewardField = new ObjectField("Reward1")
+        {
+            objectType = typeof(Reward),
+        };
+        ObjectField rewardField2 = new ObjectField("Reward2")
+        {
+            objectType = typeof(Reward),
+        };
+        ObjectField rewardField3 = new ObjectField("Reward3")
+        {
+            objectType = typeof(Reward),
+        };
+
+        rewardField.RegisterValueChangedCallback(evt =>
+        {
+            reward.Add(evt.newValue as Reward);
+        });
+        rewardField2.RegisterValueChangedCallback(evt =>
+        {
+            reward.Add(evt.newValue as Reward);
+        });
+        rewardField3.RegisterValueChangedCallback(evt =>
+        {
+            reward.Add(evt.newValue as Reward);
+        });
+
+        textFoldout.Add(rewardField);
+        textFoldout.Add(rewardField2);
+        textFoldout.Add(rewardField3);
+
+        Toggle pickRandomRewardToggle = new Toggle("Pick Random Reward")
+        {
+            value = false
+        };
+
+        pickRandomRewardToggle.RegisterValueChangedCallback(evt =>
+        {
+            if (evt.newValue)
+            {
+                pickRandomReward = false;
+            }
+        });
+        textFoldout.Add(pickRandomRewardToggle);
+
+        Toggle pickWhichRewardToggle = new Toggle("Pick Which Reward")
+        {
+            value = false
+        };
+
+        pickWhichRewardToggle.RegisterValueChangedCallback(evt =>
+        {
+            if (evt.newValue)
+            {
+                pickWhichReward = false;
+            }
+        });
+        textFoldout.Add(pickWhichRewardToggle);
+
+
         customDataContainer.Add(textFoldout);
 
 

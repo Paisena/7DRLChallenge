@@ -8,6 +8,7 @@ public class TargetManager : MonoBehaviour
     public MoodEvent[] moodEvents;
     public int MoodEventChance = 30; 
     public MoodEventText moodEventText;
+    public bool moodEventCheckFailed = false;
     public static event System.Action onMoodEventOver;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

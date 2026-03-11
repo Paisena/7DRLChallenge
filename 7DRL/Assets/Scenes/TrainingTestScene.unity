@@ -1864,7 +1864,7 @@ MonoBehaviour:
   MoodObject: {fileID: 1250226566}
   MoodChangeObject: {fileID: 1571695011}
   StageOpeningDialogue:
-  - {fileID: 11400000, guid: d8bde96c0b8d744499f3cc810466aeb7, type: 2}
+  - {fileID: 11400000, guid: af44bbfd26166474fb590259f0a0988e, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   ConfessionDialogue:
@@ -2102,6 +2102,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b7e23ab4f66b54043b092d1bf82e4596, type: 2}
   MoodEventChance: 50
   moodEventText: {fileID: 1250226568}
+  moodEventCheckFailed: 0
 --- !u!4 &783254912
 Transform:
   m_ObjectHideFlags: 0
@@ -2312,6 +2313,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 835629136}
   m_CullTransparentMesh: 1
+--- !u!1 &835901094
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 835901096}
+  - component: {fileID: 835901095}
+  m_Layer: 0
+  m_Name: Inventory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &835901095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 835901094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07326275b3b03f44aba87306d69583df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Inventory
+  items: []
+--- !u!4 &835901096
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 835901094}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1793379099}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &882702389
 GameObject:
   m_ObjectHideFlags: 0
@@ -6272,7 +6318,12 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  items: []
+  statMultipler:
+  - 0
+  - 0
+  - 0
+  - 0
+  inventory: {fileID: 835901095}
 --- !u!4 &1793379099
 Transform:
   m_ObjectHideFlags: 0
@@ -6285,7 +6336,8 @@ Transform:
   m_LocalPosition: {x: 207.62407, y: -60.51334, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 835901096}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1795709026
