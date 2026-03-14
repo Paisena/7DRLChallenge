@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0339091ce14bb0640878a4b65c6c98e9, type: 3}
+  m_Name: TE2GraphData
+  m_EditorClassIdentifier: Assembly-CSharp-Editor::DialougeGraphSavaDataSO
+  <FileName>k__BackingField: TE2
+  <Nodes>k__BackingField:
+  - <Name>k__BackingField: TE2,1
+    <CharacterName>k__BackingField: 
+    <CharacterIcon>k__BackingField: {fileID: 0}
+    <Reward>k__BackingField: []
+    <PickRandomReward>k__BackingField: 0
+    <PickWhichReward>k__BackingField: 0
+    <Text>k__BackingField: This is a training event
+    <ID>k__BackingField: 2acbb08f-49c8-43c3-a160-8fa69615224c
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialouge
+      <Requirements>k__BackingField: 
+      <NodeID>k__BackingField: d23ad2e3-738a-4c7e-b80d-0ddd90239d9b
+    <DialougeType>k__BackingField: 0
+    <Position>k__BackingField: {x: 223.33334, y: 114}
+  - <Name>k__BackingField: TE2,2
+    <CharacterName>k__BackingField: 
+    <CharacterIcon>k__BackingField: {fileID: 0}
+    <Reward>k__BackingField: []
+    <PickRandomReward>k__BackingField: 0
+    <PickWhichReward>k__BackingField: 0
+    <Text>k__BackingField: This event only occurs in location 2
+    <ID>k__BackingField: d23ad2e3-738a-4c7e-b80d-0ddd90239d9b
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialouge
+      <Requirements>k__BackingField: 
+      <NodeID>k__BackingField: 4c7b5110-c997-4a2d-9195-6b7a2fb5398a
+    <DialougeType>k__BackingField: 0
+    <Position>k__BackingField: {x: 584.6667, y: 126}
+  - <Name>k__BackingField: TE2, 3
+    <CharacterName>k__BackingField: New Character
+    <CharacterIcon>k__BackingField: {fileID: 0}
+    <Reward>k__BackingField: []
+    <PickRandomReward>k__BackingField: 0
+    <PickWhichReward>k__BackingField: 0
+    <Text>k__BackingField: Blah blah, blah blah blah
+    <ID>k__BackingField: 4c7b5110-c997-4a2d-9195-6b7a2fb5398a
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialouge
+      <Requirements>k__BackingField: 
+      <NodeID>k__BackingField: 
+    <DialougeType>k__BackingField: 0
+    <Position>k__BackingField: {x: 912, y: 140.66667}
+  <OldUngroupedNodeNames>k__BackingField:
+  - TE2,1
+  - TE2,2
+  - TE2, 3

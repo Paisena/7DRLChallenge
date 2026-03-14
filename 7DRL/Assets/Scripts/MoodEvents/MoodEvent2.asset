@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b59f48a33ab6bd442b237d9bf6474d53, type: 3}
-  m_Name: MoodEvent1
+  m_Name: MoodEvent2
   m_EditorClassIdentifier: Assembly-CSharp::MoodEvent
-  EventName: THing
-  dialouge: {fileID: 11400000, guid: eaca3a9fa90d81d46839afe9049861d2, type: 2}
+  EventName: 
+  dialouge: {fileID: 11400000, guid: e5e28de12c33eeb458b5a99da63991ab, type: 2}
   WhatStage: 0
   MoodChangeTo: 1
-  MoodChangeFrom: 0
+  MoodChangeFrom: 2

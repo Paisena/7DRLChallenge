@@ -21,20 +21,12 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        print("Pointer Enter");
-        // rectTransform.localScale = originalSize * sizeDifference;
-        // if (iconRectTransform != null)
-        //     iconRectTransform.localScale = originalSize * sizeDifference;
         Vector3 target = originalSize * sizeDifference;
         StartScaleAnimation(target);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        // rectTransform.localScale = originalSize;
-        // if (iconRectTransform != null)
-        //     iconRectTransform.localScale = originalSize;
-        print("Pointer Exit");
         StartScaleAnimation(Vector3.one);
     }
 

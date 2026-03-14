@@ -20,8 +20,11 @@ MonoBehaviour:
   <Choices>k__BackingField:
   - <Name>k__BackingField: 
     <Text>k__BackingField: Next Dialouge
-    <Requirements>k__BackingField: 
+    <Requirements>k__BackingField: progress:0.8
     <NextDialouge>k__BackingField: {fileID: 11400000, guid: e7b5739cd063a8249904d05681f36f48, type: 2}
   <DialougeTypes>k__BackingField: 0
   <IsStartingDialouge>k__BackingField: 1
-  reward: {fileID: 0}
+  reward:
+  - {fileID: 0}
+  <PickRewardRandom>k__BackingField: 0
+  <PickWhichReward>k__BackingField: 0

@@ -43,7 +43,6 @@ public class DialogueTextManager : MonoBehaviour
             }
         }
     }
-
     public enum ChoiceReuirementTypes
     {
         statOne,
@@ -125,6 +124,14 @@ public class DialogueTextManager : MonoBehaviour
         DialogueLog.Instance.AddToLog(currentDialouge.Text);
         nameText.text = currentDialouge.CharacterName;
         characterIconRenderer.sprite = currentDialouge.CharacterIcon;
+        if (characterIconRenderer.sprite != null)
+        {
+            characterIconRenderer.enabled = true;
+        }
+        else
+        {
+            characterIconRenderer.enabled = false;
+        }
     }
 
     private void OnClick(InputAction.CallbackContext ctx)

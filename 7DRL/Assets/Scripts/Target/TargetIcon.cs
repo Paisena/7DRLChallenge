@@ -26,11 +26,11 @@ public class TargetIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public void OnPointerExit(PointerEventData eventData)
     {
         // hide pop up
-        if (popUpInstance != null)
-        {
-            Destroy(popUpInstance);
-            popUpInstance = null;
-        }
+        // if (popUpInstance != null)
+        // {
+        //     Destroy(popUpInstance);
+        //     popUpInstance = null;
+        // }
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

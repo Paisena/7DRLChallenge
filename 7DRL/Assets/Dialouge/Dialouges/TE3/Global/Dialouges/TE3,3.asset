@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d145281873616314eabf77c7718bad03, type: 3}
-  m_Name: Test1
+  m_Name: TE3,3
   m_EditorClassIdentifier: Assembly-CSharp::DialougeSO
-  <DialougeName>k__BackingField: Test1
-  <CharacterName>k__BackingField: New Character
-  <CharacterIcon>k__BackingField: {fileID: 5937789906972967957, guid: 39e471f88929ee94aab7449ab4facc7f, type: 3}
-  <Text>k__BackingField: hi pal
+  <DialougeName>k__BackingField: TE3,3
+  <CharacterName>k__BackingField: 
+  <CharacterIcon>k__BackingField: {fileID: 0}
+  <Text>k__BackingField: BLAH, blah blah blah
   <Choices>k__BackingField:
   - <Name>k__BackingField: 
     <Text>k__BackingField: Next Dialouge
     <Requirements>k__BackingField: 
-    <NextDialouge>k__BackingField: {fileID: 11400000, guid: 0ff7d1a04e761e54aab73df80757ebef, type: 2}
+    <NextDialouge>k__BackingField: {fileID: 0}
   <DialougeTypes>k__BackingField: 0
-  <IsStartingDialouge>k__BackingField: 1
+  <IsStartingDialouge>k__BackingField: 0
   reward: []
   <PickRewardRandom>k__BackingField: 0
   <PickWhichReward>k__BackingField: 0

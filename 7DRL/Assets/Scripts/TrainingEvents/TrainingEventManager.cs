@@ -25,7 +25,6 @@ public class TrainingEventManager : MonoBehaviour
 
     public void GenerateEventLocation()
     {
-        //print("Generating event location");
         // roll to see if an event will occur
         int eventRoll = Random.Range(0, 100);
         if (eventRoll >= eventChance) 
@@ -34,6 +33,7 @@ public class TrainingEventManager : MonoBehaviour
             return;
         }
         // check what events are possible based on the progression of events given each location and the current target mood
+        print("Generating event location");
 
         List<TrainingEventSO> possibleEvents = new List<TrainingEventSO>();
 
